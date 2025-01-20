@@ -4,17 +4,20 @@
 
 }
 @{
+   
      
-    @foreach (var product in Model)
-{
+    <div class="productes">
+   
+    @foreach (var product in Model){
     <figure class="figure">
-            <img src="@product.imatgeproducte" class="figure-img img-fluid rounded" alt="A generic square placeholder image with rounded corners in a figure.">
+            <img width="300" height="300" src="/imatges/@product.imatgeproducte" class="figure-img img-fluid rounded" alt="A generic square placeholder image with rounded corners in a figure.">
                 <figcaption class="figure-caption">@product.nomProducte</figcaption>
-</figure>
-          <input type="submit" value="comprar"/>
-}
+                <input type="submit" value="comprar"/>
+       </figure>
+          
 }
 
-<h1>
-    Hola Cistell
-</h1>
+
+ </div>
+}
+

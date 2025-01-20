@@ -12,7 +12,6 @@
 
   <ItemGroup>
     <Folder Include="Views\layoutsCistell\" />
-    <Folder Include="wwwroot\imatges\" />
   </ItemGroup>
 
 </Project>

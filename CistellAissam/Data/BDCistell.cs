@@ -16,28 +16,28 @@ namespace CistellAissam.Data
             productes.Add(new Producte()
             {
                 codiProducte = "AIS123345",
-                imatgeproducte = "img",
+                imatgeproducte = "primerProducte.png",
                 nomProducte = "primer Producte",
                 preuProducte = 12 
             });
             productes.Add(new Producte()
             {
                 codiProducte = "AIS123345",
-                imatgeproducte = "img.png",
+                imatgeproducte ="segundoProducte.png",
                 nomProducte = "Segon Producte",
                 preuProducte = 12
             });
             productes.Add(new Producte()
             {
                 codiProducte = "AIS123345",
-                imatgeproducte = "img2.png",
+                imatgeproducte = "tercerproducte.jpeg",
                 nomProducte = "Tercer producte",
                 preuProducte = 12
             });
             productes.Add(new Producte()
             {
                 codiProducte = "AIS123345",
-                imatgeproducte = "img3.png",
+                imatgeproducte = "quartProducte.jpg",
                 nomProducte = "Quart",
                 preuProducte = 12 
             });
