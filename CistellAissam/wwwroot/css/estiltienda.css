@@ -1,0 +1,12 @@
+﻿.productes {
+    display: flex;
+    gap: 20px;
+    flex-wrap:wrap;
+    margin-left:10%;
+
+    margin-right:auto;
+}
+.btn-outline-secondary{
+    margin-top:10%;
+}
+

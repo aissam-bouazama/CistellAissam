@@ -15,16 +15,18 @@ namespace CistellAissam.Controllers
             return View("Cistell", productos);
         }
         [HttpPost]
-        public IActionResult Index(Producte pro)
+        public IActionResult Afegir()
         {
-            if (!ModelState.IsValid)
-            {
-                return View("Cistell");
-            }
-            else
-            {
-                return Content("registrat de moment al cistell  falta code");
-            }
+            /* if (!ModelState.IsValid)
+             {
+                 return View("Cistell");
+             }
+             else
+             {
+                 return Content("registrat de moment al cistell  falta code");
+             }*/
+
+            return null;
         }
     }
 }

@@ -20,6 +20,7 @@ app.UseRouting();
 
 app.UseAuthorization();
 
+
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Cistell}/{action=Index}/{id?}");

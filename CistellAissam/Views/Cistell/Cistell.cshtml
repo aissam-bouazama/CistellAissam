@@ -9,13 +9,17 @@
     <div class="productes">
    
     @foreach (var product in Model){
-    <figure class="figure">
+    <figure class="figure" style="text-align:center;">
             <img width="300" height="300" src="/imatges/@product.imatgeproducte" class="figure-img img-fluid rounded" alt="A generic square placeholder image with rounded corners in a figure.">
-                <figcaption class="figure-caption">@product.nomProducte</figcaption>
-                <input type="submit" value="comprar"/>
+                <figcaption class="figure-caption">@product.nomProducte <br /><b>@product.preuProducte €</b></figcaption>
+                <form asp-asp-controller="Cistell" asp-action="Afegir" method="post">
+                <input type="hidden" value="@product.codiProducte"/>
+                <input class="btn btn-outline-secondary" type="submit" value="Afegir a Cesta"/>
+                </form>
+                 
        </figure>
           
-}
+    }
 
 
  </div>
