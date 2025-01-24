@@ -43,21 +43,44 @@ namespace CistellAissam.Controllers
             }
             else
             {
-                if (HttpContext.Session.GetInt32("Contador") != null)
-                {
-                    quantitatcista = (int)HttpContext.Session.GetInt32("Contador") + 1;
-                }
+               
                 HttpContext.Session.SetString(codeproducte, jsonserialize);
 
             }
+            if (HttpContext.Session.GetInt32("Contador") != null)
+            {
+                quantitatcista = (int)HttpContext.Session.GetInt32("Contador") + 1;
+            }
 
-          
-            
- 
+
+
+
 
             HttpContext.Session.SetInt32("Contador", quantitatcista);
             
             return RedirectToAction("Index");
+        }
+        public IActionResult Cestill()
+        {
+            CistellRepo repository = new CistellRepo();
+            var productos = repository.ObtenirProductos();
+            List<Producte> pr = new();
+            foreach (var producte in productos)
+            {
+                if (HttpContext.Session.GetString(producte.codiProducte) != null)
+                {
+                    pr.Add(new Producte
+                    {
+                        codiProducte =producte.codiProducte,
+                        imatgeproducte = producte.imatgeproducte,
+                        nomProducte = producte.nomProducte,
+                        preuProducte = producte.preuProducte,
+                    });
+                }
+            }
+
+
+            return View("cistellCompra",pr);
         }
     }
 }

@@ -1,0 +1,29 @@
+﻿@model List<Producte>
+
+@{
+    ViewData["title"] = "Cistell de Compra";
+}
+
+<div class="cistella-container">
+    <h1 class="cistella-title">Cistell de Compra</h1>
+    <div class="productes">
+        @foreach (var product in Model)
+        {
+            <div class="product-card">
+                <img class="product-image" src="/imatges/@product.imatgeproducte" alt="@product.nomProducte">
+                <div class="product-info">
+                    <h3 class="product-name">@product.nomProducte</h3>
+                    <p class="product-price"><b>@product.preuProducte €</b></p>
+                    <div class="product-actions">
+                        <label for="quantity-@product.preuProducte">Quantitat:</label>
+                        <input id="quantity-@product.preuProducte" type="number" value="1" min="1" class="quantity-input">
+                        <button class="btn btn-danger btn-sm remove-btn">Eliminar</button>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    <div class="cistella-footer">
+        <button class="btn btn-success btn-lg checkout-btn">Finalitzar Compra</button>
+    </div>
+</div>
