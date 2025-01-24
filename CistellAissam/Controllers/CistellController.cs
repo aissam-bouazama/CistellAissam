@@ -1,6 +1,9 @@
 ﻿using CistellAissam.Data;
 using CistellAissam.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
+
 
 namespace CistellAissam.Controllers
 {
@@ -11,42 +14,50 @@ namespace CistellAissam.Controllers
         {
             CistellRepo repo = new CistellRepo();
           var productos= repo.ObtenirProductos();
-            
+            int numproductescistell = 0;
+            if (HttpContext.Session.GetInt32("Contador") != null)
+            {
+                numproductescistell = (int)HttpContext.Session.GetInt32("Contador");
+            }
+
+
+            ViewData["contador"] = numproductescistell;
+
             return View("Cistell", productos);
         }
         [HttpPost]
         public IActionResult Afegir()
         {
-            // Crear o recuperar el cistell de la sesión
-            var cistell = HttpContext.Session.GetObject<List<CistellItem>>("Cistell") ?? new List<CistellItem>();
 
-            // Verificar si el producto ya está en el cistell
-            var itemExistente = cistell.FirstOrDefault(x => x.Id == id);
-            if (itemExistente != null)
-            {
-                // Si ya existe, actualizamos la cantidad
-                itemExistente.Quantitat += quantitat;
+            
+            var codeproducte = Request.Form["codeproducte"];
+            
+            string[] cistell = [codeproducte, "1"];
+            int quantitatcista = 1;
+            int counproducts = 1;
+            string jsonserialize = JsonSerializer.Serialize(cistell);
+            if(HttpContext.Session.GetString(codeproducte)!=null){
+                string producte = (string)HttpContext.Session.GetString(codeproducte);
+                string[] productecistell = JsonSerializer.Deserialize<string[]>(producte);
+                counproducts = int.Parse(productecistell[1])+1;
             }
             else
             {
-                // Si no existe, añadimos un nuevo elemento
-                cistell.Add(new CistellItem
+                if (HttpContext.Session.GetInt32("Contador") != null)
                 {
-                    Id = id,
-                    Nom = nom,
-                    Quantitat = quantitat,
-                    Preu = preu
-                });
+                    quantitatcista = (int)HttpContext.Session.GetInt32("Contador") + 1;
+                }
+                HttpContext.Session.SetString(codeproducte, jsonserialize);
+
             }
 
-            // Guardar el cistell actualizado en la sesión
-            HttpContext.Session.SetObject("Cistell", cistell);
+          
+            
+ 
 
-            // Redirigir a la vista del cistell o retornar una respuesta
-            return View("Cistell", cistell); // Pasar el cistell a la vista
-        }
-
-            return null;
+            HttpContext.Session.SetInt32("Contador", quantitatcista);
+            
+            return RedirectToAction("Index");
         }
     }
 }
