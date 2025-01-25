@@ -26,7 +26,7 @@ namespace CistellAissam.Data
                 codiProducte = "AIS123346",
                 imatgeproducte = "3pad1.png",
                 nomProducte = "Raqueta Kombrt Negra Vermella",
-                preuProducte =160
+                preuProducte =190
             });
             productes.Add(new Producte()
             {
