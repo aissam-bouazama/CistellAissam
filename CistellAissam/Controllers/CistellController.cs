@@ -14,17 +14,11 @@ namespace CistellAissam.Controllers
         {
             CistellRepo repo = new CistellRepo();
             var productos = repo.ObtenirProductos();
-            int numproductescistell = 0;
-            if (HttpContext.Session.GetInt32("Contador") != null)
-            {
-                numproductescistell = (int)HttpContext.Session.GetInt32("Contador");
-            }
-
-
-            ViewData["contador"] = numproductescistell;
+            ViewData["contador"] = QuantitatCistella();
 
             return View("Cistell", productos);
         }
+
         [HttpPost]
         public IActionResult Afegir()
         {
@@ -39,26 +33,18 @@ namespace CistellAissam.Controllers
             if (HttpContext.Session.GetString(codeproducte) != null) {
                 string producte = (string)HttpContext.Session.GetString(codeproducte);
                 string[] productecistell = JsonSerializer.Deserialize<string[]>(producte);
-
                 counproducts = int.Parse(productecistell[1]) + 1;
                 string[] cistellambquantitat = { codeproducte, counproducts.ToString() };
                 HttpContext.Session.SetString(codeproducte, JsonSerializer.Serialize(cistellambquantitat));
             }
             else
             {
-
                 HttpContext.Session.SetString(codeproducte, jsonserialize);
-
             }
             if (HttpContext.Session.GetInt32("Contador") != null)
             {
                 quantitatcista = (int)HttpContext.Session.GetInt32("Contador") + 1;
             }
-
-
-
-
-
             HttpContext.Session.SetInt32("Contador", quantitatcista);
 
             return RedirectToAction("Index");
@@ -103,14 +89,10 @@ namespace CistellAissam.Controllers
             //passar a la vista el precio total de productos del cistell
             ViewData["preuTotal"] = preuTotal;
             //passar la quantitat dels productes del cistell
-            int numproductescistell = 0;
-            if (HttpContext.Session.GetInt32("Contador") != null)
-            {
-                numproductescistell = (int)HttpContext.Session.GetInt32("Contador");
-            }
+            
 
 
-            ViewData["contador"] = numproductescistell;
+            ViewData["contador"] = QuantitatCistella();
 
 
             return View("cistellCompra", pr);
@@ -122,7 +104,7 @@ namespace CistellAissam.Controllers
             int novaquantitat = int.Parse(Request.Form["quantitat"]);
             Cistellrepo.getProducte(codeproducte);
             var producte = HttpContext.Session.GetString(codeproducte);
-            int quantitatProd = quantitatProducte(producte); 
+            int quantitatProd = quantitatProducte(producte);
             if (novaquantitat != 0)
             {
                 var producteSession = JsonSerializer.Deserialize<string[]>(HttpContext.Session.GetString(codeproducte));
@@ -132,16 +114,17 @@ namespace CistellAissam.Controllers
                 int numproductescistell = (int)HttpContext.Session.GetInt32("Contador");
                 if (numproductescistell != null)
                 {
-                    if(novaquantitat > quantitatProd)
+                    if (novaquantitat > quantitatProd)
                     {
-                        HttpContext.Session.SetInt32("contador", (numproductescistell-quantitatProd) + novaquantitat);
+                        var n = (numproductescistell - quantitatProd) + novaquantitat;
+                        HttpContext.Session.SetInt32("Contador", n);
                     }
                     else
                     {
                         var numCistell = quantitatProd - novaquantitat;
-                        HttpContext.Session.SetInt32("contador", numproductescistell-numCistell);
+                        HttpContext.Session.SetInt32("Contador", numproductescistell - numCistell);
                     }
-                    
+
                 }
 
             }
@@ -151,14 +134,24 @@ namespace CistellAissam.Controllers
 
         public IActionResult Finalitzar()
         {
-            
-            return null;
+
+            return View("FinalitzarCompra");
         }
         public int quantitatProducte(string ProducteSessio)
         {
             var productecistell = JsonSerializer.Deserialize<string[]>(ProducteSessio);
-             return int.Parse(productecistell[1]);
-           
+            return int.Parse(productecistell[1]);
+
+        }
+        public int QuantitatCistella(){
+            int numproductescistell = 0;
+            if (HttpContext.Session.GetInt32("Contador") != null)
+            {
+                numproductescistell = (int)HttpContext.Session.GetInt32("Contador");
+            }
+
+
+           return numproductescistell;
         }
     }
 }

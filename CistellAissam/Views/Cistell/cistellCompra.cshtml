@@ -19,7 +19,7 @@
                     <p>Preu: <b class=" product-price">@product.preuProducte €</b> Preu Total : <b class="product-price">@ViewData["preuTotalt" + product.codiProducte]</b></p>
                     <div class="product-actions">
                         <label for="quantity-@product.preuProducte">Quantitat:</label>
-                        <form action="ActualizarQuantitatCistell" asp-asp-controller="Cistell" method="post">
+                        <form asp-action="ActualizarQuantitatCistell" asp-controller="Cistell" method="post">
                             <input name="codeproducte" type="hidden" value="@product.codiProducte" />
                             <input name="quantitat" id="quantity-@product.preuProducte" type="number" value="@ViewData["quantitat"+product.codiProducte]" min="0" class="quantity-input">
                             <input type="submit" class="btn btn-success" value="actualitzar" />
