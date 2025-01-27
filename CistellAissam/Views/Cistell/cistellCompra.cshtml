@@ -31,7 +31,10 @@
         }
     </div>
     <div class="cistella-footer">
-        <button class="btn btn-success btn-lg checkout-btn">Finalitzar Compra</button>
+        <form asp-controller="Cistell" asp-action="FinalitzarCompra">
+            <button type="submit" class="btn btn-success btn-lg checkout-btn">Finalitzar Compra</button>
+</form>
+       
         <b>Total: <span id="total">@ViewData["preuTotal"]</span> €</b>
     </div>
 </div>
