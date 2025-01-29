@@ -1,0 +1,21 @@
+﻿@model List<Producte>
+@{
+    ViewData["title"] = "Finalitza Compra";
+}
+@{
+    <div>
+   
+    @foreach(var producte in Model)
+    {
+            <div class="product-card">
+                <img class="product-image" src="/imatges/@producte.imatgeproducte" alt="@producte.nomProducte">
+                <div class="product-info">
+                    <h3 class="product-name">@producte.nomProducte</h3>
+                    <small class="small">codi: @producte.codiProducte</small>
+                    <p>Preu: <b class=" product-price">@producte.preuProducte €</b> Preu Total : <b class="product-price">@ViewData["preuTotalt" + producte.codiProducte]</b></p>
+                </div>
+            </div>
+    }
+    </div>
+
+}

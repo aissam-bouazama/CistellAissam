@@ -3,10 +3,10 @@
 @{
     ViewData["title"] = "Cistell de Compra";
 }
-
+<a class="btn btn-warning btn-lg" asp-action="Index" asp-controller="Cistell">Continuar Compra</a>
 <div class="cistella-container">
     <h1 class="cistella-title">Cistell de Compra</h1>
-    <div class="productes">
+   
        
         @foreach (var product in Model)
         {
@@ -17,7 +17,7 @@
                     <h3 class="product-name">@product.nomProducte</h3>
                     <small class="small">codi: @product.codiProducte</small>
                     <p>Preu: <b class=" product-price">@product.preuProducte €</b> Preu Total : <b class="product-price">@ViewData["preuTotalt" + product.codiProducte]</b></p>
-                    <div class="product-actions">
+                    <div class="product-actions" style="margin-left:25%;">
                         <label for="quantity-@product.preuProducte">Quantitat:</label>
                         <form asp-action="ActualizarQuantitatCistell" asp-controller="Cistell" method="post">
                             <input name="codeproducte" type="hidden" value="@product.codiProducte" />
@@ -29,12 +29,18 @@
                 </div>
             </div>
         }
-    </div>
-    <div class="cistella-footer">
-        <form asp-controller="Cistell" asp-action="FinalitzarCompra">
-            <button type="submit" class="btn btn-success btn-lg checkout-btn">Finalitzar Compra</button>
-</form>
-       
+   
+
+    <hr />
+    <div class="cistella-footer" style="display:flex;width:100%;">
+
+        <form asp-controller="Cistell" asp-action="FinalitzarCompra" method="post">
+
+            <button type="submit" class="btn btn-success btn-lg" name="finalitzaCompra">Finalitzar Compra</button>
+        </form>
         <b>Total: <span id="total">@ViewData["preuTotal"]</span> €</b>
     </div>
+  
+        
+   
 </div>

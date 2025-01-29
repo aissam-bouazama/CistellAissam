@@ -31,7 +31,7 @@
             padding: 20px;
         }
 
-        <style >
+      
         /* Contenedor general */
         .cistella-container {
             padding: 20px;
@@ -49,17 +49,11 @@
             margin-bottom: 20px;
         }
 
-        /* Cuadrícula de productos */
-        .productes {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
-        }
+        
 
         /* Tarjeta de producto */
         .product-card {
-            display: flex;
+            display: block;
             align-items: center;
             background-color: #ffffff;
             border: 1px solid #ddd;
@@ -69,10 +63,10 @@
             transition: transform 0.2s, box-shadow 0.2s;
         }
 
-            .product-card:hover {
-                transform: translateY(-5px);
-                box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-            }
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
 
         /* Imagen del producto */
         .product-image {
@@ -126,14 +120,14 @@
             transition: background-color 0.2s;
         }
 
-            .remove-btn:hover {
-                background-color: #c82333;
-            }
+        .remove-btn:hover {
+            background-color: #c82333;
+        }
 
         /* Footer de la cistella */
         .cistella-footer {
-            text-align: right;
-            margin-top: 20px;
+            text-align: center;
+            margin-top: 30px;
         }
 
         .checkout-btn {
@@ -147,9 +141,9 @@
             transition: background-color 0.2s;
         }
 
-            .checkout-btn:hover {
-                background-color: #218838;
-            }
+        .checkout-btn:hover {
+            background-color: #218838;
+        }
 
         
 
