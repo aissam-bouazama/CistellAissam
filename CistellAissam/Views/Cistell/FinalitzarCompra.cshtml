@@ -2,20 +2,56 @@
 @{
     ViewData["title"] = "Finalitza Compra";
 }
+
+@section Css {
+    <link href="~/css/estilFinCompra.css" rel="stylesheet" />    
+}
 @{
-    <div>
+    <div class="card">
+    <div class="card-header">
+        <div class="dades">
+                <img src="~/imatges/padelponoitlogo.png" alt="logo empresa" />
+               
+        </div>
+      
+    </div>
+    <div class="card-body">
+   
+    <table>
+    <theader>
+   
+    <tr>
+                <th>Producte</th>
+                <th>nom Producte</th>
+              
+                <th>preu Producte unitat</th>
+                <th>quantitat productes</th>
+                <th>Preu Producte Total</th>
+    </tr>
+                </theader>
+    <tbody>
    
     @foreach(var producte in Model)
     {
-            <div class="product-card">
-                <img class="product-image" src="/imatges/@producte.imatgeproducte" alt="@producte.nomProducte">
-                <div class="product-info">
-                    <h3 class="product-name">@producte.nomProducte</h3>
-                    <small class="small">codi: @producte.codiProducte</small>
-                    <p>Preu: <b class=" product-price">@producte.preuProducte €</b> Preu Total : <b class="product-price">@ViewData["preuTotalt" + producte.codiProducte]</b></p>
-                </div>
-            </div>
+          
+            <tr>
+                    <td> <img class="product-image" src="/imatges/@producte.imatgeproducte" alt="@producte.nomProducte"></td>
+                    <td>@producte.nomProducte</td>
+                    
+                    <td>@producte.preuProducte</td>
+                            <td>@ViewData["quantitat" + producte.codiProducte]</td>
+                    <td>@ViewData["preuTotalt" + producte.codiProducte]</td>
+            </tr>
     }
+                </tbody>
+                <caption><b>Total : @ViewData["preuTotal"]</b></caption>
+    </table>
+        </div>
+        <div class="card-footer">
+        &copy; Aissam Bouazama
+        </div>
     </div>
 
+
+ 
 }

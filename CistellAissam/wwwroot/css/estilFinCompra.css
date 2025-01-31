@@ -1,0 +1,26 @@
+﻿.product-card-finalitzar{
+    width:100%;
+    display:flex;
+    margin-left:10%;
+}
+table{
+    text-align:center;
+    width:95%;
+}
+caption{
+    color:white;
+    background-color:black;
+    text-align:center;
+
+}
+b{
+    width:100%;
+    text-align:right;
+}
+
+
+@media print {
+    .sidebar{
+        display:none;
+    }
+}
