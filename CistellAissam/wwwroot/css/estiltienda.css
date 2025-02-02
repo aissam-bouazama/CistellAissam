@@ -39,10 +39,7 @@
     transition: transform 0.2s, box-shadow 0.2s;
 }
 
-    .product-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-    }
+  
 
 /* Imagen del producto */
 .product-image {
@@ -121,7 +118,9 @@
         background-color: #218838;
     }
 
-
+a:active {
+    background-color: #000000;
+}
 
 .product-image {
     margin-bottom: 10px;

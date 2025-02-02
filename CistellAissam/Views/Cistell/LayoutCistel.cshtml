@@ -49,7 +49,7 @@
     <main>
         <div class="sidebar">
             <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-                <img src="~/imatges/output-onlinepngtools.png" alt="logoempressa" />
+                <img src="~/imatgesProductes/output-onlinepngtools.png" alt="logoempressa" />
             </a>
             <hr>
             <ul class="nav nav-pills flex-column mb-auto">
@@ -60,7 +60,7 @@
                 </li>
                 <li>
                     <a asp-controller="Cistell" asp-action="Cestill" class="nav-link" id="Cistell" aria-current="page">
-                        🛒 &nbsp; CISTELL <span class="text-warning">@ViewData["contador"]</span>
+                        🛒 &nbsp;<span class="text-warning">@ViewData["contador"]</span>
                     </a>
                 </li>
               
@@ -71,6 +71,8 @@
             @RenderBody()
         </div>
     </main>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+
     @await RenderSectionAsync("Scripts", required: false)
     <script src="/js/site.js"></script>
 

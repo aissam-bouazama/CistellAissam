@@ -93,22 +93,27 @@ namespace CistellAissam.Controllers
         public IActionResult ActualizarQuantitatCistell()
         {
             string codeproducte = Request.Form["codeproducte"];
-            int novaquantitat = int.Parse(Request.Form["quantitat"]);
-
+            int novaquantitat = -1;
+            if(!string.IsNullOrWhiteSpace(Request.Form["quantitat"]))
+            {
+                novaquantitat = int.Parse(Request.Form["quantitat"]);
+            }
             var producte = HttpContext.Session.GetString(codeproducte);
             int quantitatProd = quantitatProducte(producte);
-            if (novaquantitat != 0)
+            if (novaquantitat != 0 && novaquantitat > 0 && novaquantitat is int && novaquantitat != null)
             {
                 var producteSession = JsonSerializer.Deserialize<string[]>(HttpContext.Session.GetString(codeproducte));
                 producteSession[1] = novaquantitat.ToString();
                 string[] cistell = { codeproducte, producteSession[1] };
                 HttpContext.Session.SetString(codeproducte, JsonSerializer.Serialize(cistell));
+                this.actualitzarquntitatCistella(novaquantitat, quantitatProd);
             }
-            else
+            else if(novaquantitat == 0)
             {
-                this.esborrarproducte(codeproducte);
+                this.Esborrarproducte(codeproducte);
+                this.actualitzarquntitatCistella(novaquantitat, quantitatProd);
             }
-            this.actualitzarquntitatCistella(novaquantitat, quantitatProd);
+            
 
             return RedirectToAction("Cestill");
         }
@@ -139,22 +144,22 @@ namespace CistellAissam.Controllers
                     ViewData["quantitat" + producte.codiProducte] = quantitat;
                     ViewData["preuTotalt" + producte.codiProducte] = quantitat * producte.preuProducte;
                     pr.Add(producte);
+                    this.Esborrarproducte(producte.codiProducte);
                 }
             }
             //passar a la vista el precio total de productos del cistell
             ViewData["preuTotal"] = preuTotal;
             //passar la quantitat dels productes del cistell
 
-
-
             ViewData["contador"] = QuantitatCistella();
+            LimpiarqunatitatCistella();
 
             return View("FinalitzarCompra",pr);
         }
 
-        public bool esborrarproducte(string productesession) {
+        public void Esborrarproducte(string productesession) {
              HttpContext.Session.Remove(productesession);
-            return true;
+             
         }
 
         public int quantitatProducte(string ProducteSessio)
@@ -163,7 +168,7 @@ namespace CistellAissam.Controllers
             return int.Parse(productecistell[1]);
 
         }
-        public int actualitzarquntitatCistella(int novaquantitat,int quantitatProd)
+        public void actualitzarquntitatCistella(int novaquantitat,int quantitatProd)
         {
             int numproductescistell = (int)HttpContext.Session.GetInt32("Contador");
             if (numproductescistell != null)
@@ -180,7 +185,11 @@ namespace CistellAissam.Controllers
                 }
 
             }
-            return 0;
+             
+        }
+        public void LimpiarqunatitatCistella()
+        {
+            HttpContext.Session.SetInt32("Contador", 0);
         }
 
         public int QuantitatCistella(){

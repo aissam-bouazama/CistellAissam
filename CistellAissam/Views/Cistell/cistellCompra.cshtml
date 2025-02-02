@@ -3,7 +3,7 @@
 @{
     ViewData["title"] = "Cistell de Compra";
 }
-<a class="btn btn-warning btn-lg" asp-action="Index" asp-controller="Cistell">Continuar Compra</a>
+
 <div class="cistella-container">
     <h1 class="cistella-title">Cistell de Compra</h1>
    
@@ -12,7 +12,7 @@
         {
 			
             <div class="product-card">
-                <img class="product-image" src="/imatges/@product.imatgeproducte" alt="@product.nomProducte">
+            <img class="product-image" src="/imatgesProductes/@product.imatgeproducte" alt="@product.nomProducte">
                 <div class="product-info">
                     <h3 class="product-name">@product.nomProducte</h3>
                     <small class="small">codi: @product.codiProducte</small>
@@ -33,7 +33,7 @@
 
     <hr />
     <div class="cistella-footer" style="display:flex;width:100%;">
-
+        <a class="btn btn-warning btn-lg" asp-action="Index" asp-controller="Cistell" style="margin-right:5%;">Continuar Compra</a>
         <form asp-controller="Cistell" asp-action="FinalitzarCompra" method="post">
 
             <button type="submit" class="btn btn-success btn-lg" name="finalitzaCompra">Finalitzar Compra</button>
