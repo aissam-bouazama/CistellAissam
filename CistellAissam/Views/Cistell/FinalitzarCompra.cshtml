@@ -35,17 +35,18 @@
     {
           
             <tr>
-                            <td> <img class="product-image" src="/imatgesProductes/@producte.imatgeproducte" alt="@producte.nomProducte"></td>
+                    <td> <img class="product-image" src="/imatgesProductes/@producte.imatgeproducte" alt="@producte.nomProducte"></td>
                     <td>@producte.nomProducte</td>
                     
                     <td>@producte.preuProducte</td>
-                            <td>@ViewData["quantitat" + producte.codiProducte]</td>
+                     <td>@ViewData["quantitat" + producte.codiProducte]</td>
                     <td>@ViewData["preuTotalt" + producte.codiProducte]</td>
             </tr>
     }
                 </tbody>
-                <caption><b>Total : @ViewData["preuTotal"]</b></caption>
+                <tr><td colspan="4" style="text-align:end;">Total : @ViewData["preuTotal"]</td></tr>
     </table>
+          
         </div>
         <div class="card-footer">
         &copy; Aissam Bouazama

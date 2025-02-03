@@ -151,7 +151,7 @@ namespace CistellAissam.Controllers
             ViewData["preuTotal"] = preuTotal;
             //passar la quantitat dels productes del cistell
 
-            ViewData["contador"] = QuantitatCistella();
+          //  ViewData["contador"] = QuantitatCistella();
             LimpiarqunatitatCistella();
 
             return View("FinalitzarCompra",pr);
