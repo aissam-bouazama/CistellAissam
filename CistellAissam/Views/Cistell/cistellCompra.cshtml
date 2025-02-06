@@ -4,6 +4,7 @@
     ViewData["title"] = "Cistell de Compra";
 }
 
+
 <div class="cistella-container">
     <h1 class="cistella-title">Cistell de Compra</h1>
    
@@ -33,12 +34,12 @@
 
     <hr />
     <div class="cistella-footer" style="display:flex;width:100%;">
-        <a class="btn btn-warning btn-lg" asp-action="Index" asp-controller="Cistell" style="margin-right:5%;">Continuar Compra</a>
+        <a class="btn btn-outline-dark" asp-action="Index" asp-controller="Cistell" style="margin-right:5%;">Continuar Compra</a>
         <form asp-controller="Cistell" asp-action="FinalitzarCompra" method="post">
 
-            <button type="submit" class="btn btn-success btn-lg" name="finalitzaCompra">Finalitzar Compra</button>
+            <button  type="submit" class="btn btn-outline-dark" name="finalitzaCompra">Finalitzar Compra</button>
         </form>
-        <b>Total: <span id="total">@ViewData["preuTotal"]</span> €</b>
+        <b style="margin-left:45%;">Total: <span id="total">@ViewData["preuTotal"]</span> €</b>
     </div>
   
         

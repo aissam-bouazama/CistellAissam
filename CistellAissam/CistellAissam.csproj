@@ -7,11 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.7" />
+    <Compile Remove="Views\layoutsCistell\**" />
+    <Content Remove="Views\layoutsCistell\**" />
+    <EmbeddedResource Remove="Views\layoutsCistell\**" />
+    <None Remove="Views\layoutsCistell\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\layoutsCistell\" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.7" />
   </ItemGroup>
 
 </Project>
