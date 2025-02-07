@@ -1,0 +1,18 @@
+﻿@model Producte;
+@{
+   
+}
+
+@{
+    <form>
+        <label asp-for="codiProducte"></label>
+        <input asp-for="codiProducte" /> <span asp-validation-for="codiProducte" class="text-danger"></span>
+         <label asp-for="nomProducte"></label>
+        <input asp-for="nomProducte" /> <span asp-validation-for="nomProducte" class="text-danger"></span>
+        <label asp-for="preuProducte"></label>
+        <input asp-for="preuProducte" /> <span asp-validation-for="preuProducte" class="text-danger"></span>
+        <input type="hidden" asp-for="imatgeproducte" value="padadid.jpg" /> <span asp-validation-for="imatgeproducte" class="text-danger"></span>
+        
+
+    </form>
+}
