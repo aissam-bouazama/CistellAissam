@@ -1,9 +1,11 @@
 ﻿using CistellAissam.Data;
 using CistellAissam.Models;
+using CistellAissam.Logicacistella;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Drawing;
 using System.Text.Json;
+using System;
 
 
 namespace CistellAissam.Controllers
@@ -12,6 +14,7 @@ namespace CistellAissam.Controllers
     public class CistellController : Controller
     {
         public CistellRepo repo = new CistellRepo();
+        public AccionsCistella accions = new AccionsCistella();
         [HttpGet]
         public IActionResult Index()
         {
@@ -28,22 +31,12 @@ namespace CistellAissam.Controllers
 
             //Recuperar el code del produce desde el form
             var codeproducte = Request.Form["codeproducte"];
-
-            string[] cistell = { codeproducte, "1" };
+           
+            accions.AddProducte(codeproducte);
+            var productescistella = accions.GetCistella();
             int quantitatcista = 1;
-            int counproducts = 1;
-            //convertir el produce i la quantitat a un json
-            string jsonserialize = JsonSerializer.Serialize(cistell);
-            if (HttpContext.Session.GetString(codeproducte) != null) {
-                string producte = (string)HttpContext.Session.GetString(codeproducte);
-                string[] productecistell = JsonSerializer.Deserialize<string[]>(producte);
-                counproducts = int.Parse(productecistell[1]) + 1;
-                string[] cistellambquantitat = { codeproducte, counproducts.ToString() };
-                HttpContext.Session.SetString(codeproducte, JsonSerializer.Serialize(cistellambquantitat));
-            }else
-            {
-                HttpContext.Session.SetString(codeproducte, jsonserialize);
-            }
+            
+            HttpContext.Session.SetString("productescistella", JsonSerializer.Serialize(productescistella));
 
             if (HttpContext.Session.GetInt32("Contador") != null)
             {
@@ -54,39 +47,36 @@ namespace CistellAissam.Controllers
             return RedirectToAction("Index");
         }
         public IActionResult Cestill()
-        { 
+        {
             var productos = repo.ObtenirProductos();
-            //inicializar la lista de productos para almacenar los productos que se encuentran en la session
-            List<Producte> pr = new();
+            List<Producte> pr = new List<Producte>();
             //inicializar el variable para almacenar el precio total de productos del cistell
             var preuTotal = 0.0;
             //quantita del producte 
             int quantitat = 0;
-            foreach (var producte in productos)
+            var productesSessionString = HttpContext.Session.GetString("productescistella");
+            if (!string.IsNullOrEmpty(productesSessionString))
             {
-                var prosession = HttpContext.Session.GetString(producte.codiProducte);
-                if (prosession != null)
+                List<Cistella> productesSession = JsonSerializer.Deserialize<List<Cistella>>(productesSessionString);
+                if (productesSession != null)
                 {
-                    var productecistell = JsonSerializer.Deserialize<string[]>(prosession);
-                    quantitat = int.Parse(productecistell[1]);
-                    for (int i = 0; i < quantitat; i++)
+                    foreach (var elem in productesSession)
                     {
-                        preuTotal += producte.preuProducte;
+                        var producte = productos.FirstOrDefault(p => p.codiProducte == elem.codeproducte);
+                        if (producte != null)
+                        {
+                            double totalpreuproducte = Math.Round(elem.quantitat * producte.preuProducte,2);
+                            ViewData["quantitat" + producte.codiProducte] = elem.quantitat;
+                            ViewData["preuTotalt" + producte.codiProducte] = totalpreuproducte;
+                            preuTotal += totalpreuproducte;
+                            pr.Add(producte);
+                        }
                     }
-                    //passar la quantitat por el view data 
-                    ViewData["quantitat" + producte.codiProducte] = quantitat;
-                    ViewData["preuTotalt" + producte.codiProducte] = quantitat * producte.preuProducte;
-                    pr.Add(producte);
                 }
             }
-            //passar a la vista el precio total de productos del cistell
             ViewData["preuTotal"] = preuTotal;
-            //passar la quantitat dels productes del cistell
-            
-
 
             ViewData["contador"] = QuantitatCistella();
-
 
             return View("cistellCompra", pr);
         }
@@ -120,39 +110,35 @@ namespace CistellAissam.Controllers
 
         public IActionResult FinalitzarCompra()
         {
-           
-            List<Producte> products = new List<Producte>();
             var productos = repo.ObtenirProductos();
-            //inicializar la lista de productos para almacenar los productos que se encuentran en la session
-            List<Producte> pr = new();
+            List<Producte> pr = new List<Producte>();
             //inicializar el variable para almacenar el precio total de productos del cistell
             var preuTotal = 0.0;
             //quantita del producte 
             int quantitat = 0;
-            foreach (var producte in productos)
+            var productesSessionString = HttpContext.Session.GetString("productescistella");
+            if (!string.IsNullOrEmpty(productesSessionString))
             {
-                var prosession = HttpContext.Session.GetString(producte.codiProducte);
-                if (prosession != null)
+                List<Cistella> productesSession = JsonSerializer.Deserialize<List<Cistella>>(productesSessionString);
+                if (productesSession != null)
                 {
-                    var productecistell = JsonSerializer.Deserialize<string[]>(prosession);
-                    quantitat = int.Parse(productecistell[1]);
-                    for (int i = 0; i < quantitat; i++)
+                    foreach (var elem in productesSession)
                     {
-                        preuTotal += producte.preuProducte;
+                        var producte = productos.FirstOrDefault(p => p.codiProducte == elem.codeproducte);
+                        if (producte != null)
+                        {
+                            double totalpreuproducte = Math.Round(elem.quantitat * producte.preuProducte, 2);
+                            ViewData["quantitat" + producte.codiProducte] = elem.quantitat;
+                            ViewData["preuTotalt" + producte.codiProducte] = totalpreuproducte;
+                            preuTotal += totalpreuproducte;
+                            pr.Add(producte);
+                        }
                     }
-                    //passar la quantitat por el view data 
-                    ViewData["quantitat" + producte.codiProducte] = quantitat;
-                    ViewData["preuTotalt" + producte.codiProducte] = quantitat * producte.preuProducte;
-                    pr.Add(producte);
-                    this.Esborrarproducte(producte.codiProducte);
                 }
             }
-            //passar a la vista el precio total de productos del cistell
             ViewData["preuTotal"] = preuTotal;
-            //passar la quantitat dels productes del cistell
 
-          //  ViewData["contador"] = QuantitatCistella();
-            LimpiarqunatitatCistella();
+            ViewData["contador"] = QuantitatCistella();
 
             return View("FinalitzarCompra",pr);
         }

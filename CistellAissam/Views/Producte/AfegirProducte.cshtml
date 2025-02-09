@@ -2,16 +2,20 @@
 @{
    
 }
+@section Css{
+	<link href="~/css/estilform.css" rel="stylesheet" />
+}
 
 @{
-    <form>
+    <form enctype="multipart/form-data" asp-action="AfegirProducte" asp-controller="Producte">
         <label asp-for="codiProducte"></label>
         <input asp-for="codiProducte" /> <span asp-validation-for="codiProducte" class="text-danger"></span>
          <label asp-for="nomProducte"></label>
         <input asp-for="nomProducte" /> <span asp-validation-for="nomProducte" class="text-danger"></span>
         <label asp-for="preuProducte"></label>
         <input asp-for="preuProducte" /> <span asp-validation-for="preuProducte" class="text-danger"></span>
-        <input type="hidden" asp-for="imatgeproducte" value="padadid.jpg" /> <span asp-validation-for="imatgeproducte" class="text-danger"></span>
+        <input type="file" accept="jpg/avif" asp-for="imatgeproducte" /> <span asp-validation-for="imatgeproducte" class="text-danger"></span>
+		<input asp-action="AfegirProducte" asp-controller="Producte" type="submit" value="Afegir" />
         
 
     </form>
