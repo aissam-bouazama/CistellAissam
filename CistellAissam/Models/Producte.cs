@@ -12,6 +12,6 @@ namespace CistellAissam.Models
         [Required(ErrorMessage = "el Preu del producte és obligatori")]
         public double preuProducte {  get; set; }
         [Required(ErrorMessage = "Imatge del producte és obligatoria")]
-        public IFormFile imatgeproducte { get; set; }
+        public string imatgeproducte { get; set; }
     }
 }

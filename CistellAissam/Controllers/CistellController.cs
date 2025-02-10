@@ -28,16 +28,12 @@ namespace CistellAissam.Controllers
         [HttpPost]
         public IActionResult Afegir()
         {
-
             //Recuperar el code del produce desde el form
             var codeproducte = Request.Form["codeproducte"];
-           
             accions.AddProducte(codeproducte);
             var productescistella = accions.GetCistella();
             int quantitatcista = 1;
-            
             HttpContext.Session.SetString("productescistella", JsonSerializer.Serialize(productescistella));
-
             if (HttpContext.Session.GetInt32("Contador") != null)
             {
                 quantitatcista = (int)HttpContext.Session.GetInt32("Contador") + 1;
@@ -88,26 +84,23 @@ namespace CistellAissam.Controllers
             {
                 novaquantitat = int.Parse(Request.Form["quantitat"]);
             }
-            var producte = HttpContext.Session.GetString(codeproducte);
-            int quantitatProd = quantitatProducte(producte);
+           
+            int quantitatProd = quantitatProducte(codeproducte);
             if (novaquantitat != 0 && novaquantitat > 0 && novaquantitat is int && novaquantitat != null)
             {
-                var producteSession = JsonSerializer.Deserialize<string[]>(HttpContext.Session.GetString(codeproducte));
-                producteSession[1] = novaquantitat.ToString();
-                string[] cistell = { codeproducte, producteSession[1] };
-                HttpContext.Session.SetString(codeproducte, JsonSerializer.Serialize(cistell));
-                this.actualitzarquntitatCistella(novaquantitat, quantitatProd);
+                accions.actualizarQuantitat(codeproducte, novaquantitat);
+                 this.actualitzarquntitatCistella(novaquantitat, quantitatProd);
             }
             else if(novaquantitat == 0)
             {
-                this.Esborrarproducte(codeproducte);
+               accions.EsborrarProducte(codeproducte);
                 this.actualitzarquntitatCistella(novaquantitat, quantitatProd);
             }
-            
+            var productescistella = accions.GetCistella();
+            HttpContext.Session.SetString("productescistella", JsonSerializer.Serialize(productescistella));
 
             return RedirectToAction("Cestill");
         }
-
         public IActionResult FinalitzarCompra()
         {
             var productos = repo.ObtenirProductos();
@@ -142,17 +135,9 @@ namespace CistellAissam.Controllers
 
             return View("FinalitzarCompra",pr);
         }
-
-        public void Esborrarproducte(string productesession) {
-             HttpContext.Session.Remove(productesession);
-             
-        }
-
         public int quantitatProducte(string ProducteSessio)
         {
-            var productecistell = JsonSerializer.Deserialize<string[]>(ProducteSessio);
-            return int.Parse(productecistell[1]);
-
+             return accions.getProducte(ProducteSessio).quantitat;
         }
         public void actualitzarquntitatCistella(int novaquantitat,int quantitatProd)
         {
@@ -177,15 +162,12 @@ namespace CistellAissam.Controllers
         {
             HttpContext.Session.SetInt32("Contador", 0);
         }
-
         public int QuantitatCistella(){
             int numproductescistell = 0;
             if (HttpContext.Session.GetInt32("Contador") != null)
             {
                 numproductescistell = (int)HttpContext.Session.GetInt32("Contador");
             }
-
-
            return numproductescistell;
         }
     }

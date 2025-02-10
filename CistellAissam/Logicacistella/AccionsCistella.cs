@@ -1,18 +1,25 @@
-﻿using CistellAissam.Models;
+﻿using CistellAissam.Data;
+using CistellAissam.Models;
+using Microsoft.CodeAnalysis.Elfie.Diagnostics;
 namespace CistellAissam.Logicacistella
 
 {
     public class AccionsCistella
     {
-        private static List<Cistella> cistella = new List<Cistella>();
+        private static List<Cistella> cistella;
+
 
         public int AddProducte(string codeproducte)
         {
             //0 si ja existeix el producte a la cistella i s'ha incrementat la quantitat
             //1 si s'ha afegit correctament
             Cistella producte = new Cistella();
-            
-           
+            if(cistella == null)
+            {
+                cistella = new List<Cistella>();
+            }
+
+
             int process = 1;
             if (cistella.Exists(x => x.codeproducte == codeproducte))
             {
@@ -37,9 +44,29 @@ namespace CistellAissam.Logicacistella
         {
             return cistella;
         }
-        public void DeleteProducte(string codeproducte)
+
+        public Cistella? getProducte(string codiproducte)
+        {
+            foreach (Cistella pro in cistella)
+            {
+                if (pro.codeproducte == codiproducte)
+                {
+                    return pro;
+                }
+            }
+            return null;
+        }
+        public void EsborrarProducte(string codeproducte)
         {
             cistella.RemoveAll(x => x.codeproducte == codeproducte);
+        }
+        public void actualizarQuantitat(string codeproducte, int quantitat)
+        {
+            int index = cistella.FindIndex(x => x.codeproducte == codeproducte);
+            if (index != -1)
+            {
+                cistella[index].quantitat = quantitat;
+            }
         }
     }
 }
