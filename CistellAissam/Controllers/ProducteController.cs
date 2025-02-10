@@ -9,12 +9,12 @@ namespace CistellAissam.Controllers
         CistellRepo repo = new CistellRepo();
         public IActionResult Index()
         {
+            ViewData["pagina"] = "afegir";
             return View("AfegirProducte");
         }
-        public IActionResult AfegirProducte(Producte producte)
+        public async Task<IActionResult> AfegirProducte(Producte producte)
         {
-            Console.WriteLine("AfegirProducte");
-            Console.WriteLine(producte.imatgeproducte);
+           
             if (!ModelState.IsValid)
             {
                 return View("AfegirProducte");
