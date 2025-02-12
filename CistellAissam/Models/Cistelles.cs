@@ -11,6 +11,14 @@ public class Cistelles
     private List<Cistella> cistella = [];
 
 
+    public Cistelles(List<Cistella> cesta)
+    {
+        cistella = cesta;
+    }
+    public Cistelles()
+    {
+    }
+
     public int AddProducte(string codeproducte)
     {
         //0 si ja existeix el producte a la cistella i s'ha incrementat la quantitat
