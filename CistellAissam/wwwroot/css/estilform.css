@@ -1,5 +1,16 @@
 ﻿
 label, input {
-    display: block;
-   
+    display: block; 
+}
+form{
+    width:80%;
+}
+fieldset {
+    border: 1px solid black ;
+}
+
+legend {
+    background-color: #000 ;
+    color: #fff ;
+    padding: 3px 6px ;
 }

@@ -1,6 +1,5 @@
 ﻿using CistellAissam.Data;
 using CistellAissam.Models;
-using CistellAissam.Logicacistella;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Drawing;
@@ -14,7 +13,7 @@ namespace CistellAissam.Controllers
     public class CistellController : Controller
     {
         public CistellRepo repo = new CistellRepo();
-        public AccionsCistella accions = new AccionsCistella();
+        public Cistelles accions = new Cistelles();
         [HttpGet]
         public IActionResult Index()
         {

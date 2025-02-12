@@ -19,8 +19,6 @@ namespace CistellAissam.Controllers
             {
                 return View("AfegirProducte");
             }
-
-           
             repo.AfegirProducte(producte);
 
             return RedirectToAction("Index");
