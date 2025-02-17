@@ -19,11 +19,17 @@ namespace CistellAissam.Data
         {
             return BDCistell.productes;
         }
-        public void AfegirProducte(Producte producte)
+        public Boolean AfegirProducte(Producte producte)
         {
             if (getProducte(producte.codiProducte) == null)
             {
                 BDCistell.productes.Add(producte);
+                return true;
+
+            }
+            else
+            {
+                return false;
             }
 
 

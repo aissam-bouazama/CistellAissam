@@ -1,19 +1,27 @@
 ﻿@model Producte;
-
+@{
+ViewData["title"]="Afegir Producte";
+}
 @section Css {
 	<link href="~/css/estilform.css" rel="stylesheet" />
 }
+
 
 @{
     <form enctype="multipart/form-data" asp-action="AfegirProducte" asp-controller="Producte" method="post">
         <fieldset>
           <legend>Afegir Nou Producte</legend>
+            <span action="text-danger">@ViewData["resultat"] </span>
         <label asp-for="codiProducte"></label>
-        <input asp-for="codiProducte" /> <span asp-validation-for="codiProducte" class="text-danger"></span>
+        <input asp-for="codiProducte" /> <span asp-validation-for="codiProducte" class="text-danger"></span><br />
          <label asp-for="nomProducte"></label>
-        <input asp-for="nomProducte" /> <span asp-validation-for="nomProducte" class="text-danger"></span>
+            <input asp-for="nomProducte" />
+            <span asp-validation-for="nomProducte" class="text-danger"></span>
+            <br />
         <label asp-for="preuProducte"></label>
-        <input asp-for="preuProducte" /><span asp-validation-for="preuProducte" class="text-danger"></span>
+            <input asp-for="preuProducte" />
+            <span asp-validation-for="preuProducte" class="text-danger"></span>
+            <br />
   <!--    <label asp-for="imatgeproducte"></label>-->
             <input type="hidden" value="1pad.webp" asp-for="imatgeproducte" />
             <span asp-validation-for="imatgeproducte" class="text-danger"></span>

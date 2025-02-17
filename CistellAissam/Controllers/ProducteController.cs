@@ -17,9 +17,16 @@ namespace CistellAissam.Controllers
            
             if (!ModelState.IsValid)
             {
-                return View("AfegirProducte");
+                ViewData["pagina"] = "afegir";
+                return View("AfegirProducte",producte);
             }
-            repo.AfegirProducte(producte);
+            if (repo.AfegirProducte(producte))
+            {
+                ViewData["resultat"] = "Producte Afegit Correctament";
+            }else
+            {
+                ViewData["resultat"] = "Producte Aquest codi del producte ja existeix ..";
+            }
 
             return RedirectToAction("Index");
         }
