@@ -14,10 +14,10 @@ namespace CistellAissam.Controllers
         }
         public async Task<IActionResult> AfegirProducte(Producte producte)
         {
-           
+            ViewData["pagina"] = "afegir";
+            Console.WriteLine("Producte: " + producte.imatgeproducte);
             if (!ModelState.IsValid)
-            {
-                ViewData["pagina"] = "afegir";
+            { 
                 return View("AfegirProducte",producte);
             }
             if (repo.AfegirProducte(producte))
@@ -26,9 +26,10 @@ namespace CistellAissam.Controllers
             }else
             {
                 ViewData["resultat"] = "Producte Aquest codi del producte ja existeix ..";
+                
             }
 
-            return RedirectToAction("Index");
+            return View("AfegirProducte");
         }
     }
 }

@@ -115,7 +115,7 @@ namespace CistellAissam.Controllers
         }
         public IActionResult FinalitzarCompra()
         {
-            var productos = repo.ObtenirProductos();
+           
             List<Producte> pr = new List<Producte>();
             //inicializar el variable para almacenar el precio total de productos del cistell
             var preuTotal = 0.0;
@@ -129,7 +129,7 @@ namespace CistellAissam.Controllers
                 {
                     foreach (var elem in productesSession)
                     {
-                        var producte = productos.FirstOrDefault(p => p.codiProducte == elem.codeproducte);
+                        var producte = repo.getProducte(elem.codeproducte);
                         if (producte != null)
                         {
                             double totalpreuproducte = Math.Round(elem.quantitat * producte.preuProducte, 2);
@@ -142,7 +142,8 @@ namespace CistellAissam.Controllers
                 }
             }
             ViewData["preuTotal"] = preuTotal;
-
+            LimpiarqunatitatCistella();
+            HttpContext.Session.Remove("productescistella");
             ViewData["contador"] = QuantitatCistella();
 
             return View("FinalitzarCompra",pr);

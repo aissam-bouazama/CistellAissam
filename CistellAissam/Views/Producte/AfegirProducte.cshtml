@@ -8,10 +8,10 @@ ViewData["title"]="Afegir Producte";
 
 
 @{
-    <form enctype="multipart/form-data" asp-action="AfegirProducte" asp-controller="Producte" method="post">
+    <form enctype="multipart/form-data" asp-action="AfegirProducte" asp-controller="Producte" method="POST">
         <fieldset>
           <legend>Afegir Nou Producte</legend>
-            <span action="text-danger">@ViewData["resultat"] </span>
+            <span class="text-danger">@ViewData["resultat"] </span><br />
         <label asp-for="codiProducte"></label>
         <input asp-for="codiProducte" /> <span asp-validation-for="codiProducte" class="text-danger"></span><br />
          <label asp-for="nomProducte"></label>
@@ -22,10 +22,10 @@ ViewData["title"]="Afegir Producte";
             <input asp-for="preuProducte" />
             <span asp-validation-for="preuProducte" class="text-danger"></span>
             <br />
-  <!--    <label asp-for="imatgeproducte"></label>-->
+  <!--    <label asp-for="imatgeproducte"></label>
             <input type="hidden" value="1pad.webp" asp-for="imatgeproducte" />
-            <span asp-validation-for="imatgeproducte" class="text-danger"></span>
-       <!--
+                      <span asp-validation-for="imatgeproducte" class="text-danger"></span>-->
+       
         <dl>
             <dt>
                 <label asp-for="imatgeproducte"></label>
@@ -34,10 +34,13 @@ ViewData["title"]="Afegir Producte";
                 <input asp-for="imatgeproducte" type="file" />
                 <span asp-validation-for="imatgeproducte"></span>
             </dd>
-        </dl>-->
+        </dl>
        
 
-		<input asp-action="AfegirProducte" asp-controller="Producte" type="submit" value="Afegir" />
+		<input  type="submit" value="Afegir" />
         </fieldset>
     </form>
+}
+@section Scripts {
+	
 }
