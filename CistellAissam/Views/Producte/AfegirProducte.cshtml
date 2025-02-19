@@ -8,7 +8,7 @@ ViewData["title"]="Afegir Producte";
 
 
 @{
-    <form enctype="multipart/form-data" asp-action="AfegirProducte" asp-controller="Producte" method="POST">
+    <form enctype="multipart/form-data" asp-action="AfegirProducte" asp-controller="Producte" method="post">
         <fieldset>
           <legend>Afegir Nou Producte</legend>
             <span class="text-danger">@ViewData["resultat"] </span><br />
@@ -26,15 +26,12 @@ ViewData["title"]="Afegir Producte";
             <input type="hidden" value="1pad.webp" asp-for="imatgeproducte" />
                       <span asp-validation-for="imatgeproducte" class="text-danger"></span>-->
        
-        <dl>
-            <dt>
+        
                 <label asp-for="imatgeproducte"></label>
-            </dt>
-            <dd>
-                <input asp-for="imatgeproducte" type="file" />
+           
+                <input asp-for="imatgeproducte" class="form-control" type="file" accept="image/png,image/jpg" required/>
                 <span asp-validation-for="imatgeproducte"></span>
-            </dd>
-        </dl>
+        
        
 
 		<input  type="submit" value="Afegir" />
@@ -42,5 +39,5 @@ ViewData["title"]="Afegir Producte";
     </form>
 }
 @section Scripts {
-	
+    <partial name="_ValidationScriptsPartial" />
 }
