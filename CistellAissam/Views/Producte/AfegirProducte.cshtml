@@ -8,33 +8,34 @@ ViewData["title"]="Afegir Producte";
 
 
 @{
-    <form enctype="multipart/form-data" asp-action="AfegirProducte" asp-controller="Producte" method="post">
+    <form class="card" enctype="multipart/form-data" asp-action="AfegirProducte" asp-controller="Producte" method="post">
         <fieldset>
-          <legend>Afegir Nou Producte</legend>
-            <span class="text-danger">@ViewData["resultat"] </span><br />
+        <div class="card-header">
+                <h5>Afegir Nou Producte</h5>
+            </div>
+          <div class="card-body">
+            <span class="text-success">@ViewData["resultat"] </span><br />
         <label asp-for="codiProducte"></label>
-        <input asp-for="codiProducte" /> <span asp-validation-for="codiProducte" class="text-danger"></span><br />
+            <input class="form-control" asp-for="codiProducte" />
+            <span asp-validation-for="codiProducte" class="text-danger"></span>
+            <br />
          <label asp-for="nomProducte"></label>
-            <input asp-for="nomProducte" />
+            <input class="form-control" asp-for="nomProducte" />
             <span asp-validation-for="nomProducte" class="text-danger"></span>
             <br />
         <label asp-for="preuProducte"></label>
-            <input asp-for="preuProducte" />
+            <input class="form-control" asp-for="preuProducte" />
             <span asp-validation-for="preuProducte" class="text-danger"></span>
-            <br />
-  <!--    <label asp-for="imatgeproducte"></label>
-            <input type="hidden" value="1pad.webp" asp-for="imatgeproducte" />
-                      <span asp-validation-for="imatgeproducte" class="text-danger"></span>-->
-       
-        
+            <br />       
                 <label asp-for="imatgeproducte"></label>
            
-                <input asp-for="imatgeproducte" class="form-control" type="file" accept="image/png,image/jpg" required/>
-                <span asp-validation-for="imatgeproducte"></span>
+                <input asp-for="imatgeproducte" class="form-control" type="file" accept="image/png,image/jpg"/>
+                <span class="text-danger" asp-validation-for="imatgeproducte"></span><br />
         
        
 
-		<input  type="submit" value="Afegir" />
+		<input class="btn btn-success"  type="submit" value="Afegir" />
+            </div>
         </fieldset>
     </form>
 }

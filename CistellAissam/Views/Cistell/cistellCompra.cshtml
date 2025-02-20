@@ -4,7 +4,14 @@
     ViewData["title"] = "Cistell de Compra";
     
 }
-
+@section Css {
+   <style>
+        .cistella-container {
+            font-family: 'Courier New';
+       }
+       
+   </style>
+}
 
 <div class="cistella-container">
     <h1 class="cistella-title">Cistell de Compra</h1>
@@ -15,7 +22,7 @@
         {
 			
             <div class="product-card">
-            <img class="product-image" src="/imatgesProductes/@product.imatgeproducte" alt="@product.nomProducte">
+                <img class="product-image" src="/imatgesProductes/productes/@product.imatgeproducte" alt="@product.nomProducte">
                 <div class="product-info">
                     <h3 class="product-name">@product.nomProducte</h3>
                     <small class="small">codi: @product.codiProducte</small>

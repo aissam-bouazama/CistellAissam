@@ -3,14 +3,19 @@ label, input {
     display: block; 
 }
 form{
-    width:80%;
+    margin-top:25px;
+    color:black;
+    width:70%;
+    margin-left:auto;
+    margin-right:auto;
 }
 fieldset {
     border: 1px solid black ;
 }
-
-legend {
-    background-color: #000 ;
-    color: #fff ;
-    padding: 3px 6px ;
+.btn{
+    margin-top:10px;
+    width:140px;
+    
 }
+
+
