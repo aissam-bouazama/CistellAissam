@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using CistellAissam.Models;
 using CistellAissam.Data;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace CistellAissam.Controllers
 {
@@ -22,25 +23,6 @@ namespace CistellAissam.Controllers
         {
             ViewData["pagina"] = "afegir";
             ModelState.Clear();
-            if (string.IsNullOrEmpty(producte.codiProducte))
-            {
-                ModelState.AddModelError("codiProducte", "El codi del producte és obligatori.");
-            }
-
-            if (string.IsNullOrEmpty(producte.nomProducte))
-            {
-                ModelState.AddModelError("nomProducte", "El nom del producte és obligatori.");
-            }
-
-            if (producte.preuProducte <= 0)
-            {
-                ModelState.AddModelError("preuProducte", "El preu del producte ha de ser més gran que 0.");
-            }
-
-            if (imatgeproducte == null || imatgeproducte.Length == 0)
-            {
-                ModelState.AddModelError("imatgeproducte", "L'imatge del producte és obligatòria.");
-            }
 
             var  imatge = await OnPostUploadAsync(imatgeproducte);
             if (string.IsNullOrEmpty(imatge))
@@ -51,8 +33,6 @@ namespace CistellAissam.Controllers
             else
             {
                 producte.imatgeproducte = imatge;
-
-                
                 if (!TryValidateModel(producte))
                 {
                     return View("AfegirProducte", producte);
@@ -62,12 +42,11 @@ namespace CistellAissam.Controllers
                 else
                 {
                     ModelState.AddModelError("codiProducte", "Aquest Codi de Producte ja existeix ");
+                    return View("AfegirProducte", producte);
                 }
                
             }
-
-
-            return View("AfegirProducte");
+            return LocalRedirect("/");
         }
         /// <summary>
         /// 
@@ -81,6 +60,14 @@ namespace CistellAissam.Controllers
                 return string.Empty;  
             }
 
+             string[] permittedExtensions = { ".png", ".jpg",".jpeg" };
+
+             var ext = Path.GetExtension(file.FileName).ToLowerInvariant();
+
+            if (string.IsNullOrEmpty(ext) || !permittedExtensions.Contains(ext))
+            {
+                return string.Empty;
+            }
             var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/imatgesProductes/Productes");
 
             if (!Directory.Exists(uploadsFolder))
