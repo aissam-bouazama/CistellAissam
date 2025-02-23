@@ -34,5 +34,31 @@ namespace CistellAissam.Data
 
 
         }
+        public Boolean EliminarProducte(string codiproducte)
+        {
+            Producte? producte = getProducte(codiproducte);
+            if (producte != null)
+            {
+                BDCistell.productes.Remove(producte);
+                return true;
+            }
+            else{
+                return false;
+            }
+        }  
+        public Producte? ModificarProducte(Producte producte)
+        {
+            Producte? producte1 = getProducte(producte.codiProducte);
+            if (producte1 != null)
+            { 
+               int index =  BDCistell.productes.IndexOf(producte1);
+                BDCistell.productes[index].nomProducte = producte.nomProducte;
+                BDCistell.productes[index].preuProducte = producte.preuProducte;
+                BDCistell.productes[index].imatgeproducte = producte.imatgeproducte;
+                return producte1;
+            } else {
+                return null;
+            }
+        }
     }
 }

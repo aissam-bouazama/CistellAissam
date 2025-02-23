@@ -13,18 +13,13 @@ namespace CistellAissam.Controllers
             ViewData["pagina"] = "afegir";
             return View("AfegirProducte");
         }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="producte"></param>
-        /// <param name="imatgeproducte"></param>
-        /// <returns></returns>
+     
         public async Task<IActionResult> AfegirProducte(Producte producte,IFormFile imatgeproducte)
         {
             ViewData["pagina"] = "afegir";
             ModelState.Clear();
 
-            var  imatge = await OnPostUploadAsync(imatgeproducte);
+            var  imatge = await CargarImatge(imatgeproducte);
             if (string.IsNullOrEmpty(imatge))
             {
                 ModelState.AddModelError("imatgeproducte", "No s'ha pogut pujar la imatge del producte....");
@@ -48,12 +43,8 @@ namespace CistellAissam.Controllers
             }
             return LocalRedirect("/");
         }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="file"></param>
-        /// <returns></returns>
-        public async Task<string> OnPostUploadAsync(IFormFile file)
+      
+        public async Task<string> CargarImatge(IFormFile file)
         {
             if (file == null || file.Length == 0)
             {
