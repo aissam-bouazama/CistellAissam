@@ -47,7 +47,7 @@ namespace CistellAissam.Controllers
                 quantitatcista = (int)HttpContext.Session.GetInt32("Contador") + 1;
             }
             HttpContext.Session.SetInt32("Contador", quantitatcista);
-
+            return Json(new { contador = quantitatcista });
             return RedirectToAction("Index");
         }
         public IActionResult Cestill()
