@@ -50,6 +50,41 @@ namespace CistellAissam.Controllers
             return Json(new { contador = quantitatcista });
             return RedirectToAction("Index");
         }
+        public  IActionResult Actualitzar()
+        {
+            var codeproducte = Request.Form["codeproducte"];
+            var producte = repo.getProducte(codeproducte);
+            if(producte != null)
+            {
+                return View("ActualitzarProducte",producte);
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
+
+        }
+        [HttpPost]
+        public IActionResult ActualitzarProducte(Producte producte)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View("ActualitzarProducte", producte);
+            }
+            else
+            {
+                
+                repo.ModificarProducte(producte);
+            }
+            return LocalRedirect("/");
+
+        }
+        public IActionResult EsborrarProducte()
+        {
+            var codeproducte = Request.Form["codeproducte"];
+            repo.EliminarProducte(codeproducte);
+            return RedirectToAction("Index");
+        }
         public IActionResult Cestill()
         {
             var productos = repo.ObtenirProductos();
