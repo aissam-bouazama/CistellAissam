@@ -30,10 +30,12 @@
             <figure class="figure col mb-5" style="text-align:center; ">
                 <img width="300" height="300" src="/imatgesProductes/productes/@product.imatgeproducte" class="figure-img img-fluid rounded" alt="A generic square placeholder image with rounded corners in a figure.">
                 <figcaption class="figure-caption">@product.nomProducte <br /><b>@product.preuProducte €</b></figcaption>
-                <form asp-controller="Cistell" asp-action="Afegir" method="post">
+                
+                    <form asp-controller="Cistell" asp-action="Afegir" method="post">
                         <input type="hidden" name="codeproducte" value="@product.codiProducte"/>
                 <input class="btn btn-outline-secondary fa" type="submit" value="Afegir a Cesta"/>
                 </form>
+                
                  
        </figure>
           

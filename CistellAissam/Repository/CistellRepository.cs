@@ -1,8 +1,9 @@
 ﻿using CistellAissam.Models;
+using CistellAissam.Data;
 
-namespace CistellAissam.Data
+namespace CistellAissam.Repository
 {
-    public class CistellRepo
+    public class CistellRepository
     {
         public Producte? getProducte(string codiproducte)
         {

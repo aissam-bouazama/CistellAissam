@@ -1,6 +1,7 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
+   
     <title id="titol">
         Aissam-@ViewData["title"]</title>
     <style>
@@ -35,6 +36,9 @@
        a{
             color:white;
         }
+        ul>.nav-link{
+         padding:25px;
+        }
 
       
       
@@ -51,13 +55,17 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 </head>
 <body>
+    @{
+
+        var userauth = (Usuari)ViewData["userauth"];
+    }
     <main>
         <div class="sidebar">
             <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                 <img src="~/imatgesProductes/output-onlinepngtools.png" alt="logoempressa" />
             </a>
             <hr>
-            <ul class="nav nav-pills flex-column mb-auto">
+            <ul class="nav nav-pills flex-column mb-auto" >
                 <li class="nav-item">
                     <a asp-controller="Cistell" style="color:white;" asp-action="Index" class="nav-link" id="tienda" aria-current="page">
                         🛍️ &nbsp; BOTIGA
@@ -71,12 +79,43 @@
                     </a>
                 </li>
                 }
+                 @if (userauth != null)
+                    {
+                        @if (userauth.isAdmin)
+                        {
                 <li>
-                    <a asp-controller="Producte" style="color:white;" asp-action="Index" class="nav-link" id="Cistell" aria-current="page">
-                   <i class="fa fa-plus"></i> Afegir Nou Producte
-                    </a>
+                   
+
+
+                            <a asp-controller="Producte" style="color:white;" asp-action="Index" class="nav-link" id="Cistell" aria-current="page">
+                                <i class="fa fa-plus"></i> Afegir Nou Producte
+                            </a>
+                      
                 </li>
-              
+                    }
+                }
+                @if (userauth == null)
+                 {
+                <li>
+                    <a asp-controller="Login" style="color:white;" asp-action="Index" class="nav-link" id="Cistell" aria-current="page">
+                            <i class="bi bi-box-arrow-right"></i>&nbsp; Login
+                    </a>
+                    </li>
+                }
+                else
+                {
+
+                    <li style="color:white;" class="nav-link">
+                        <i class="fa fa-user"></i>&nbsp;@userauth.email
+                    </li>
+                    <li>
+                        <a asp-controller="Login" style="color:white;" asp-action="Logout" class="nav-link" id="Cistell" aria-current="page">
+                            <i class="bi bi-box-arrow-left"></i>&nbsp; Logout
+                        </a>
+                    </li>
+
+                }
+
             </ul>
         </div>
 
