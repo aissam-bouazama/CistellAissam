@@ -48,6 +48,7 @@
     </table>
           
         </div>
+		<button class="btn btn-outline-info" type="button" id="imprimir">Imprimir</button>
         <div class="card-footer">
         &copy; Aissam Bouazama
         </div>
@@ -55,4 +56,11 @@
 
 
  
+}
+@section Scripts {
+	<script>
+		document.getElementById("imprimir").addEventListener("click", function () {
+			window.print();
+		});
+	</script>
 }
