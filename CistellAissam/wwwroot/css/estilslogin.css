@@ -1,0 +1,30 @@
+﻿.entrada {
+    width: 100%;
+    
+    height: 40px;
+}
+.card{
+    width:45%;
+    margin-top:120px;
+    
+    margin-left:auto;
+    margin-right:auto;
+}
+body {
+    background-image: url("../imatgesProductes/back2.jpg") ;
+    background-size: cover;
+}
+
+.btn {
+    width: 100%;
+    height: 35px;
+    background-color: #BABABA !important;
+    text-transform: uppercase;
+    color: #8F8F8F !important;
+}
+
+form {
+    width: 85%;
+    margin-left: auto;
+    margin-right: auto;
+}

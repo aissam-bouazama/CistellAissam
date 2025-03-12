@@ -55,7 +55,16 @@
  				fetch("/Cistell/Afegir", {
  					method: "POST",
  					body:new FormData(e.target.form),
-                 }).then(response => response.json()).then(res=>document.getElementById("contador").innerText = res.contador);
+                 }).then(response => response.json()).then(res=>{
+                     console.log(res);
+                     if(res.error == undefined){
+                      document.getElementById("contador").innerText = res.count;
+                     }else{
+                         alert(res.error);
+                     }
+                    
+                 });
+
              }
          });
      </script>

@@ -36,5 +36,19 @@ namespace CistellAissam.Utils
         {
             httpcontext.Session.SetInt32("Contador", contador);
         }
+
+
+        public static Usuari ObtenerUsuariAuth(HttpContext httpcontext)
+        {
+            var user = httpcontext.Session.GetString("usuarisession");
+
+
+            if (user != null)
+            {
+                var userauth = JsonSerializer.Deserialize<Usuari>(user);
+               return userauth;
+            }
+            return null;
+        }
     }
 }

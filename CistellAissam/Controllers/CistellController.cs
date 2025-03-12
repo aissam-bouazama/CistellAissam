@@ -23,15 +23,8 @@ namespace CistellAissam.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-          
-            var user = HttpContext.Session.GetString("usuarisession");
-          
-           
-            if (user != null)
-            {
-                var userauth = JsonSerializer.Deserialize<Usuari>(user);
-                ViewData["userauth"] = userauth;
-            }
+
+            ViewData["userauth"] = SessionUtils.ObtenerUsuariAuth(HttpContext);
             var productos = repo.ObtenirProductos();
             ViewData["contador"] = QuantitatCistella();
 
@@ -43,11 +36,12 @@ namespace CistellAissam.Controllers
 
         public IActionResult Afegir(string codeproducte)
         {
-            var user = HttpContext.Session.GetString("usuarisession");
-            if (user != null)
+            var user = SessionUtils.ObtenerUsuariAuth(HttpContext);
+            ViewData["userauth"] = user;
+           
+            if (UsuariUtils.IsadminUsuari(HttpContext))
             {
-                var userauth = JsonSerializer.Deserialize<Usuari>(user);
-                ViewData["userauth"] = userauth;
+                return Json(new {error = "El Administrador no es Pot Afegir Productes a Cistella"});
             }
             int quantitatcista = 1;
             var Cesta = SessionUtils.ObtenerProductosSession(HttpContext);
@@ -59,20 +53,14 @@ namespace CistellAissam.Controllers
             var productescistella = cistella.GetCistella();
             SessionUtils.GuardarProductosSession(HttpContext, productescistella);
             SessionUtils.IncrementarContadorCesta(HttpContext);
-           
-            return RedirectToAction("Index");
+            var data = new { count = QuantitatCistella() };
+            return Json(data);
+           // return RedirectToAction("Index");
             
         }
         public IActionResult Cestill()
         {
-            var user = HttpContext.Session.GetString("usuarisession");
-
-
-            if (user != null)
-            {
-                var userauth = JsonSerializer.Deserialize<Usuari>(user);
-                ViewData["userauth"] = userauth;
-            }
+            ViewData["userauth"] = SessionUtils.ObtenerUsuariAuth(HttpContext);
             var productos = repo.ObtenirProductos();
             List<Producte> pr = new List<Producte>();
             var preuTotal = 0.0;
@@ -106,14 +94,7 @@ namespace CistellAissam.Controllers
         
         public IActionResult ActualizarQuantitatCistell()
         {
-            var user = HttpContext.Session.GetString("usuarisession");
-
-
-            if (user != null)
-            {
-                var userauth = JsonSerializer.Deserialize<Usuari>(user);
-                ViewData["userauth"] = userauth;
-            }
+            ViewData["userauth"] = SessionUtils.ObtenerUsuariAuth(HttpContext);
             string codeproducte = Request.Form["codeproducte"];
             int novaquantitat = -1;
             if (HttpContext.Session.GetString("productescistella") != null)
@@ -144,14 +125,7 @@ namespace CistellAissam.Controllers
         }
         public IActionResult FinalitzarCompra()
         {
-            var user = HttpContext.Session.GetString("usuarisession");
-
-
-            if (user != null)
-            {
-                var userauth = JsonSerializer.Deserialize<Usuari>(user);
-                ViewData["userauth"] = userauth;
-            }
+            ViewData["userauth"] = SessionUtils.ObtenerUsuariAuth(HttpContext);
 
             List<Producte> pr = new List<Producte>();
             //inicializar el variable para almacenar el precio total de productos del cistell

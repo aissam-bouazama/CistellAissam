@@ -8,18 +8,28 @@
             display:block;
         }
     </style>
+    <link href="~/css/estilslogin.css" rel="stylesheet" />
 }
 
 @{
-    <form method="post" asp-controller="Login" asp-action="Login">
-    
-    <label asp-for="email">Email:</label><br />
-        <input name="email" asp-for="email" required type="email" placeholder="Introduieix el Correu électronic"/>
-        <span asp-validation-for="email" class="text-danger"></span><br />
+    <div class="card">
+    <div class="card-header">
+        <h3>Iniciar Session</h3>
+    </div>
+    <div class="card-body">
+            <form method="post" asp-controller="Login" asp-action="Login">
 
-        <label asp-for="password">contrasenya:</label><br />
-        <input name="password" asp-for="password" required type="password" placeholder="Introduieix contrasenya" />
-        <span asp-validation-for="password" class="text-danger"></span><br />
-        <input type="submit" value="Iniciar Session" />
-    </form>
+                <label asp-for="email">Email:</label><br />
+                <input class="entrada" name="email" asp-for="email" required type="email" placeholder="Introduieix el Correu électronic" />
+                <span asp-validation-for="email" class="text-danger"></span><br />
+
+                <label asp-for="password">contrasenya:</label><br />
+                <input class="entrada" name="password" asp-for="password" required type="password" placeholder="Introduieix contrasenya" />
+                <span asp-validation-for="password" class="text-danger"></span><br />
+                <input class="btn" type="submit" value="Login" />
+
+            </form>
+    </div>
+</div>
+    
 }
