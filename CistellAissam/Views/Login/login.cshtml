@@ -1,0 +1,25 @@
+﻿@model Usuari;
+@{
+    ViewData["title"] = "Login";
+}
+@section Css{
+    <style>
+        input,label{
+            display:block;
+        }
+    </style>
+}
+
+@{
+    <form method="post" asp-controller="Login" asp-action="Login">
+    
+    <label asp-for="email">Email:</label><br />
+        <input name="email" asp-for="email" required type="email" placeholder="Introduieix el Correu électronic"/>
+        <span asp-validation-for="email" class="text-danger"></span><br />
+
+        <label asp-for="password">contrasenya:</label><br />
+        <input name="password" asp-for="password" required type="password" placeholder="Introduieix contrasenya" />
+        <span asp-validation-for="password" class="text-danger"></span><br />
+        <input type="submit" value="Iniciar Session" />
+    </form>
+}

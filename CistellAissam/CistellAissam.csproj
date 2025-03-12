@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -11,14 +11,6 @@
     <Content Remove="Views\layoutsCistell\**" />
     <EmbeddedResource Remove="Views\layoutsCistell\**" />
     <None Remove="Views\layoutsCistell\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Remove="wwwroot\imatgesProductes\Productes\142750db-efc2-4f54-800c-e3ff196267f8_padel-6322450_1280.jpg" />
-    <Content Remove="wwwroot\imatgesProductes\Productes\1ea1e40b-63f6-4ddc-b570-91db2eca292e_padel-6322450_1280.jpg" />
-    <Content Remove="wwwroot\imatgesProductes\Productes\5f0065ec-066d-4887-b8a9-dafda3b2bd6a_padel-6322450_1280.jpg" />
-    <Content Remove="wwwroot\imatgesProductes\Productes\a362edc5-b9d3-4b82-8b4b-8dc5e89f4b13_padel-6322450_1280.jpg" />
-    <Content Remove="wwwroot\imatgesProductes\Productes\dc290752-6a54-4904-9ac5-f83a3260c707_padel-6322450_1280.jpg" />
   </ItemGroup>
 
   <ItemGroup>

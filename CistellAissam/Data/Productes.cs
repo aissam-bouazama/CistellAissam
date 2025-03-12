@@ -2,7 +2,7 @@
 
 namespace CistellAissam.Data
 {
-    public static class BDCistell
+    public static class Productes
     {
         
 
@@ -11,7 +11,7 @@ namespace CistellAissam.Data
             public static List<Producte> productes = new();
 
 
-            static BDCistell()
+            static Productes()
         {
             
             productes.Add(new Producte()

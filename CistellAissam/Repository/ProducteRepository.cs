@@ -1,12 +1,13 @@
 ﻿using CistellAissam.Models;
+using CistellAissam.Data;
 
-namespace CistellAissam.Data
+namespace CistellAissam.Repository
 {
-    public class CistellRepo
+    public class ProducteRepository
     {
         public Producte? getProducte(string codiproducte)
         {
-            foreach (Producte pro in BDCistell.productes)
+            foreach (Producte pro in Productes.productes)
             {
                 if (pro.codiProducte == codiproducte)
                 {
@@ -17,13 +18,13 @@ namespace CistellAissam.Data
         }
         public List<Producte>? ObtenirProductos()
         {
-            return BDCistell.productes;
+            return Productes.productes;
         }
         public Boolean AfegirProducte(Producte producte)
         {
             if (getProducte(producte.codiProducte) == null)
             {
-                BDCistell.productes.Add(producte);
+                Productes.productes.Add(producte);
                 return true;
 
             }

@@ -16,20 +16,20 @@ ViewData["title"]="Afegir Producte";
           <div class="card-body">
             <span class="text-success">@ViewData["resultat"] </span><br />
         <label asp-for="codiProducte"></label>
-            <input class="form-control" asp-for="codiProducte" />
+                <input class="form-control" asp-for="codiProducte" required />
             <span asp-validation-for="codiProducte" class="text-danger"></span>
             <br />
          <label asp-for="nomProducte"></label>
-            <input class="form-control" asp-for="nomProducte" />
+                <input class="form-control" asp-for="nomProducte" required />
             <span asp-validation-for="nomProducte" class="text-danger"></span>
             <br />
         <label asp-for="preuProducte"></label>
-            <input class="form-control" asp-for="preuProducte" />
+                <input class="form-control" asp-for="preuProducte" required />
             <span asp-validation-for="preuProducte" class="text-danger"></span>
             <br />       
                 <label asp-for="imatgeproducte"></label>
            
-                <input asp-for="imatgeproducte" class="form-control" type="file" accept="image/png,image/jpg"/>
+                <input asp-for="imatgeproducte" class="form-control" type="file" accept="image/png,image/jpg" required/>
                 <span class="text-danger" asp-validation-for="imatgeproducte"></span><br />
         
        
@@ -40,5 +40,6 @@ ViewData["title"]="Afegir Producte";
     </form>
 }
 @section Scripts {
-    <partial name="_ValidationScriptsPartial" />
+    
+    
 }
