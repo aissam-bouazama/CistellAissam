@@ -1,5 +1,7 @@
-﻿using CistellAissam.Models;
+﻿using CistellAissam.Data;
+using CistellAissam.Models;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
 using System.Text.Json;
 
 namespace CistellAissam.Utils
@@ -49,6 +51,12 @@ namespace CistellAissam.Utils
                return userauth;
             }
             return null;
+        }
+
+        public static void AfegirUsuariSessio(HttpContext httpcontext,Usuari usuari)
+        {
+            httpcontext.Session.SetString("usuarisession", JsonSerializer.Serialize(usuari));
+            httpcontext.Session.Remove(usuari.email);
         }
     }
 }

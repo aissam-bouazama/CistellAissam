@@ -33,8 +33,7 @@ namespace CistellAissam.Controllers
                         {
                         if (!usuari.locked)
                         {
-                            HttpContext.Session.SetString("usuarisession", JsonSerializer.Serialize(usuari));
-                            HttpContext.Session.Remove(email);
+                            SessionUtils.AfegirUsuariSessio(HttpContext, usuari);
                             return LocalRedirect("/");
                         }
                         else

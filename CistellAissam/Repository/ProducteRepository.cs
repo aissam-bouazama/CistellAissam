@@ -20,7 +20,7 @@ namespace CistellAissam.Repository
         {
             return Productes.productes;
         }
-        public Boolean AfegirProducte(Producte producte)
+        public bool AfegirProducte(Producte producte)
         {
             if (getProducte(producte.codiProducte) == null)
             {
