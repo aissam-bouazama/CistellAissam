@@ -7,7 +7,7 @@ namespace CistellAissam.Repository
     {
         public Producte? getProducte(string codiproducte)
         {
-            foreach (Producte pro in BDCistell.productes)
+            foreach (Producte pro in Productes.productes)
             {
                 if (pro.codiProducte == codiproducte)
                 {
@@ -18,13 +18,13 @@ namespace CistellAissam.Repository
         }
         public List<Producte>? ObtenirProductos()
         {
-            return BDCistell.productes;
+            return Productes.productes;
         }
-        public Boolean AfegirProducte(Producte producte)
+        public bool AfegirProducte(Producte producte)
         {
             if (getProducte(producte.codiProducte) == null)
             {
-                BDCistell.productes.Add(producte);
+                Productes.productes.Add(producte);
                 return true;
 
             }
@@ -32,15 +32,13 @@ namespace CistellAissam.Repository
             {
                 return false;
             }
-
-
         }
-        public Boolean EliminarProducte(string codiproducte)
+        public bool EliminarProducte(string codiproducte)
         {
             Producte? producte = getProducte(codiproducte);
             if (producte != null)
             {
-                BDCistell.productes.Remove(producte);
+                Productes.productes.Remove(producte);
                 return true;
             }
             else{
@@ -52,10 +50,10 @@ namespace CistellAissam.Repository
             Producte? producte1 = getProducte(producte.codiProducte);
             if (producte1 != null)
             { 
-               int index =  BDCistell.productes.IndexOf(producte1);
-                BDCistell.productes[index].nomProducte = producte.nomProducte;
-                BDCistell.productes[index].preuProducte = producte.preuProducte;
-                BDCistell.productes[index].imatgeproducte = producte.imatgeproducte;
+               int index = Productes.productes.IndexOf(producte1);
+                Productes.productes[index].nomProducte = producte.nomProducte;
+                Productes.productes[index].preuProducte = producte.preuProducte;
+                Productes.productes[index].imatgeproducte = producte.imatgeproducte;
                 return producte1;
             } else {
                 return null;

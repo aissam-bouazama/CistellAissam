@@ -10,7 +10,10 @@ namespace CistellAissam.Controllers
 {
     public class ProducteController : Controller
     {
+
         ProducteRepository repo = new();
+
+        
         public IActionResult Index()
         {
            
@@ -69,10 +72,10 @@ namespace CistellAissam.Controllers
             return LocalRedirect("/");
         }
         /// <summary>
-        /// 
+        /// Cargar la imatge al Projecte 
         /// </summary>
-        /// <param name="file"></param>
-        /// <returns></returns>
+        /// <param name="file">Imatge que vols cargar al Projecte </param>
+        /// <returns>el nom de la imagen guardada</returns>
         public async Task<string> CargarImatge(IFormFile file)
         {
             if (file == null || file.Length == 0)
