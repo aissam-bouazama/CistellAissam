@@ -1,9 +1,10 @@
-﻿using CistellAissam.Models;
-using CistellAissam.Data;
+﻿using CistellAissam.Data;
+using CistellAissam.Models;
+using CistellAissam.Repository.Interfaces;
 
 namespace CistellAissam.Repository
 {
-    public class ProducteRepository
+    public class ProducteRepository : IProducteRepository
     {
         public Producte? getProducte(string codiproducte)
         {

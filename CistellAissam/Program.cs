@@ -1,14 +1,22 @@
+using CistellAissam.Repository;
+using CistellAissam.Repository.Interfaces;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddDistributedMemoryCache(); 
+builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>
 {
     options.IdleTimeout = TimeSpan.FromMinutes(30);
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
 });
+builder.Services.AddRazorPages();
+
+builder.Services.AddScoped<ICistellRepository, CistellRepository>();
+builder.Services.AddScoped<IProducteRepository, ProducteRepository>();
+builder.Services.AddScoped<IUsuariRepository, UsuariRepository>();
 
 var app = builder.Build();
 

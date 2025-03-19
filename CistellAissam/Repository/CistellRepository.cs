@@ -1,9 +1,10 @@
-﻿using CistellAissam.Models;
-using CistellAissam.Data;
+﻿using CistellAissam.Data;
+using CistellAissam.Models;
+using CistellAissam.Repository.Interfaces;
 
 namespace CistellAissam.Repository
 {
-    public class CistellRepository
+    public class CistellRepository : ICistellRepository
     {
         public Producte? getProducte(string codiproducte)
         {
@@ -41,21 +42,24 @@ namespace CistellAissam.Repository
                 Productes.productes.Remove(producte);
                 return true;
             }
-            else{
+            else
+            {
                 return false;
             }
-        }  
+        }
         public Producte? ModificarProducte(Producte producte)
         {
             Producte? producte1 = getProducte(producte.codiProducte);
             if (producte1 != null)
-            { 
-               int index = Productes.productes.IndexOf(producte1);
+            {
+                int index = Productes.productes.IndexOf(producte1);
                 Productes.productes[index].nomProducte = producte.nomProducte;
                 Productes.productes[index].preuProducte = producte.preuProducte;
                 Productes.productes[index].imatgeproducte = producte.imatgeproducte;
                 return producte1;
-            } else {
+            }
+            else
+            {
                 return null;
             }
         }

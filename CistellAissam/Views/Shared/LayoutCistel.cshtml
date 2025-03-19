@@ -11,13 +11,14 @@
         }
 
         .sidebar {
-            font-family: 'Courier New';
+            font-family:Barlow, Arial, Helvetica, sans-serif;
             display: flex;
             flex-direction: row;
             flex-shrink: 0;
             padding: 15px;
+            font-weight: 700;
             /*text-white;*/
-            background-color: black; /* Bootstrap dark */
+            background-color: #141B5D; /* Bootstrap dark */
           /*  width: 280px;
             height: 100vh; /* Full height */
             position: sticky;
@@ -69,7 +70,7 @@
             <ul class="nav nav-pills flex mb-auto" >
                 <li class="nav-item">
                     <a asp-controller="Cistell" style="color:white;" asp-action="Index" class="nav-link" id="tienda" aria-current="page">
-                        🛍️ &nbsp; BOTIGA
+                        🛍 &nbsp; BOTIGA
                     </a>
                 </li>
                 @if(ViewData["pagina"] != "afegir")
@@ -88,9 +89,9 @@
                    
 
 
-                            <a asp-controller="Producte" style="color:white;" asp-action="Index" class="nav-link" id="Cistell" aria-current="page">
-                                <i class="fa fa-plus"></i> Afegir Nou Producte
-                            </a>
+                    <a asp-controller="Producte" style="color:white;" asp-action="Index" class="nav-link" id="Cistell" aria-current="page">
+                        <i class="fa fa-plus"></i> Afegir Nou Producte
+                    </a>
                       
                 </li>
                     }

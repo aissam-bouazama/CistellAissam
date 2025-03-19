@@ -1,8 +1,9 @@
-﻿using CistellAissam.Models; 
-using CistellAissam.Data;
+﻿using CistellAissam.Data;
+using CistellAissam.Models;
+using CistellAissam.Repository.Interfaces;
 namespace CistellAissam.Repository
 {
-    public class UsuariRepository
+    public class UsuariRepository : IUsuariRepository
     {
         public Usuari? getUsuari(string email)
         {
@@ -19,15 +20,15 @@ namespace CistellAissam.Repository
         public bool BloquejarUsuari(Usuari usuari)
         {
             var usuaris = Usuaris._usuaris;
-           int index = usuaris.IndexOf(usuari);
-            if(index != -1)
+            int index = usuaris.IndexOf(usuari);
+            if (index != -1)
             {
                 Usuaris._usuaris[index].locked = true;
                 Usuaris._usuaris[index].lastupdate = DateTime.Now;
                 return true;
             }
             return false;
-            
+
         }
 
     }

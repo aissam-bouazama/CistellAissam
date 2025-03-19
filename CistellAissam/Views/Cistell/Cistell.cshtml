@@ -6,18 +6,12 @@
 @section Css {
     
     <style>
-        .productes {
-            display: inline-grid;
-            width: 80%;
-            margin-left:auto;
-			margin-right: auto;
-            justify-content: center;
-            align-items: center;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            font-family: 'Courier New';
-   
+        
+        .figure{
+            max-width:300px;
+            min-width:300px;
         }
+
         
     </style>
 }
@@ -28,7 +22,7 @@
    
     @foreach (var product in Model){
             <figure class="figure col mb-5" style="text-align:center; ">
-                <img width="300" height="300" src="/imatgesProductes/productes/@product.imatgeproducte" class="figure-img img-fluid rounded" alt="A generic square placeholder image with rounded corners in a figure.">
+                <img style="width:300px !important;" width="300" height="300" src="/imatgesProductes/productes/@product.imatgeproducte" class="figure-img img-fluid rounded" alt="A generic square placeholder image with rounded corners in a figure.">
                 <figcaption class="figure-caption">@product.nomProducte <br /><b>@product.preuProducte €</b></figcaption>
                 
                     <form asp-controller="Cistell" asp-action="Afegir" method="post">

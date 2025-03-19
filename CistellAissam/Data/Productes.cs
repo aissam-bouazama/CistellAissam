@@ -4,16 +4,16 @@ namespace CistellAissam.Data
 {
     public static class Productes
     {
-        
-
-  
-       
-            public static List<Producte> productes = new();
 
 
-            static Productes()
+
+
+        public static List<Producte> productes = new();
+
+
+        static Productes()
         {
-            
+
             productes.Add(new Producte()
             {
                 codiProducte = "AIS123345",
@@ -26,14 +26,14 @@ namespace CistellAissam.Data
                 codiProducte = "AIS123346",
                 imatgeproducte = "3pad1.png",
                 nomProducte = "Raqueta Kombrt Negra Vermella",
-                preuProducte =190
+                preuProducte = 190
             });
             productes.Add(new Producte()
             {
                 codiProducte = "AIS123347",
                 imatgeproducte = "4pad.jpg",
                 nomProducte = "Raqueta wilson verde negre",
-                preuProducte = 50 
+                preuProducte = 50
             });
             productes.Add(new Producte()
             {
@@ -52,10 +52,10 @@ namespace CistellAissam.Data
 
 
 
-            
+
 
         }
-       
+
     }
 
 }

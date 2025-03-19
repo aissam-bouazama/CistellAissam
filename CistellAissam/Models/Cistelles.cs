@@ -1,6 +1,4 @@
-﻿using CistellAissam.Data;
-using CistellAissam.Models;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
 namespace CistellAissam.Models;
 
@@ -24,17 +22,18 @@ public class Cistelles
         //0 si ja existeix el producte a la cistella i s'ha incrementat la quantitat
         //1 si s'ha afegit correctament
         Cistella producte = new Cistella();
-       
+
 
         int process = 1;
         if (cistella.Exists(x => x.codeproducte == codeproducte))
         {
-          // producte =  cistella.Find(x => x.codeproducte.Equals(codeproducte));
-          int posicion = cistella.FindIndex(x => x.codeproducte == codeproducte);
-            if(posicion != -1) {
+            // producte =  cistella.Find(x => x.codeproducte.Equals(codeproducte));
+            int posicion = cistella.FindIndex(x => x.codeproducte == codeproducte);
+            if (posicion != -1)
+            {
                 cistella[posicion].quantitat++;
             }
-           
+
             process = 0;
         }
         else
@@ -67,7 +66,7 @@ public class Cistelles
         cistella.RemoveAll(x => x.codeproducte == codeproducte);
     }
     public void actualizarQuantitat(string codeproducte, int quantitat)
-    { 
+    {
         int index = cistella.FindIndex(x => x.codeproducte == codeproducte);
         if (index != -1)
         {

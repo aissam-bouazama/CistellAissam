@@ -1,11 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace CistellAissam.Models
 {
     public class Producte
     {
-        [Required(ErrorMessage="el codi del producte és obligatori")]
+        [Required(ErrorMessage = "el codi del producte és obligatori")]
         public string codiProducte { get; set; }
         [Required(ErrorMessage = "el nom del producte és obligatori")]
         public string nomProducte { get; set; }
@@ -14,6 +13,6 @@ namespace CistellAissam.Models
         public double preuProducte { get; set; }
         [Required(ErrorMessage = "L'imatge del producte és obligatòria.")]
         public string? imatgeproducte { get; set; }
-       
+
     }
 }

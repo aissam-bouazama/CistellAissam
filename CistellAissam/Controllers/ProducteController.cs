@@ -1,24 +1,27 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using CistellAissam.Models;
-using CistellAissam.Data;
-using static System.Net.Mime.MediaTypeNames;
-using CistellAissam.Repository;
+﻿using CistellAissam.Models;
+using CistellAissam.Repository.Interfaces;
 using CistellAissam.Utils;
-using System.Text.Json;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CistellAissam.Controllers
 {
     public class ProducteController : Controller
     {
 
-        ProducteRepository repo = new();
+        /*  ProducteRepository repo = new();*/
+        private readonly IProducteRepository _RepoProducte;
 
-        
+        public ProducteController(IProducteRepository repo)
+        {
+            this._RepoProducte = repo;
+        }
+
+
         public IActionResult Index()
         {
-           
+
             ViewData["userauth"] = SessionUtils.ObtenerUsuariAuth(HttpContext);
-            
+
             if (UsuariUtils.IsadminUsuari(HttpContext))
             {
                 ViewData["pagina"] = "afegir";
@@ -56,7 +59,7 @@ namespace CistellAissam.Controllers
                     {
                         return View("AfegirProducte", producte);
                     }
-                    else if (repo.AfegirProducte(producte))
+                    else if (_RepoProducte.AfegirProducte(producte))
                     {
                         ViewData["resultat"] = "Producte Afegit Correctament";
                     }
@@ -68,7 +71,7 @@ namespace CistellAissam.Controllers
 
                 }
             }
-        
+
             return LocalRedirect("/");
         }
         /// <summary>
@@ -80,12 +83,12 @@ namespace CistellAissam.Controllers
         {
             if (file == null || file.Length == 0)
             {
-                return string.Empty;  
+                return string.Empty;
             }
 
-             string[] permittedExtensions = { ".png", ".jpg",".jpeg" };
+            string[] permittedExtensions = { ".png", ".jpg", ".jpeg" };
 
-             var ext = Path.GetExtension(file.FileName).ToLowerInvariant();
+            var ext = Path.GetExtension(file.FileName).ToLowerInvariant();
 
             if (string.IsNullOrEmpty(ext) || !permittedExtensions.Contains(ext))
             {
@@ -103,7 +106,7 @@ namespace CistellAissam.Controllers
 
             using (var stream = new FileStream(filePath, FileMode.Create))
             {
-                await file.CopyToAsync(stream); 
+                await file.CopyToAsync(stream);
             }
 
             return uniqueFileName;
