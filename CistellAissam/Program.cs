@@ -14,9 +14,10 @@ builder.Services.AddSession(options =>
 });
 builder.Services.AddRazorPages();
 
-builder.Services.AddScoped<ICistellRepository, CistellRepository>();
-builder.Services.AddScoped<IProducteRepository, ProducteRepository>();
-builder.Services.AddScoped<IUsuariRepository, UsuariRepository>();
+builder.Services.AddTransient<ICistellRepository, CistellRepository>();
+builder.Services.AddTransient<IProducteRepository, ProducteRepository>();
+//builder.Services.AddTransient<IUsuariRepository, UsuariRepository>();
+builder.Services.AddTransient<IUsuariRepository, UsuariRepositoryBD>();
 
 var app = builder.Build();
 
