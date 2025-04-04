@@ -8,11 +8,19 @@ namespace CistellAissam.Repository
 {
     public class UsuariRepositoryBD : IUsuariRepository
     {
-        public bool BloquejarUsuari(Usuari usuari)
+		MySqlConnection? _conection;
+		MySqlTransaction trans;
+		public UsuariRepositoryBD(MySqlConnection connection, MySqlTransaction trans)
+		{
+			this._conection = connection;
+            this.trans = trans;
+		}
+		public bool BloquejarUsuari(Usuari usuari)
         {
             throw new NotImplementedException();
         }
-        public bool Check(string email,string password)
+		
+		public bool Check(string email,string password)
         {
             MySqlConnection? conn = DB.Open();
             if (conn == null) return false;
