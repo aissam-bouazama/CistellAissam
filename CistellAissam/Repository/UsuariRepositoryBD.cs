@@ -15,7 +15,7 @@ namespace CistellAissam.Repository
 			this._conection = connection;
             this.trans = trans;
 		}
-		public bool BloquejarUsuari(Usuari usuari)
+		public bool BloquejarUsuari(UsuariLogin usuari)
         {
             throw new NotImplementedException();
         }
@@ -34,13 +34,13 @@ namespace CistellAissam.Repository
            return num > 0;
         }
 
-        public void Add(Usuari usuari) { 
+        public void Add(UsuariLogin usuari) { 
 
         }
 
-        public Usuari? getUsuari(string email)
+        public UsuariLogin? getUsuari(string email)
         {
-            Usuari? usuari = null;
+            UsuariLogin? usuari = null;
             string query = "SELECT * from users where email = @useremail";
             MySqlConnection? conn = DB.Open();
             if (conn == null) return usuari;
@@ -49,7 +49,7 @@ namespace CistellAissam.Repository
             cmd.Parameters.AddWithValue("@useremail", email);
             MySqlDataReader reader = cmd.ExecuteReader();
             if (reader.Read()) { 
-                usuari = new Usuari();
+                usuari = new UsuariLogin();
                 usuari.email = email;
                 usuari.password = reader.GetString("password");
                 usuari.isAdmin = reader.GetBoolean("isadmin");

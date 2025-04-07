@@ -12,7 +12,7 @@ namespace CistellAissam.Utils
         /// <param name="usuari"></param>
         /// <param name="count"></param>
         /// <returns>devuelve el numero de intentos en el caso q passa los intentos permitidos Bloquejara el Usuari</returns>
-        public static int ControlintentosLogin(Usuari usuari, int count)
+        public static int ControlintentosLogin(UsuariLogin usuari, int count)
         {
             UsuariRepository usuaris = new();
             if (count == 2)
@@ -37,7 +37,7 @@ namespace CistellAissam.Utils
             var user = httpContext.Session.GetString("usuarisession");
             if (user != null)
             {
-                var userauth = JsonSerializer.Deserialize<Usuari>(user);
+                var userauth = JsonSerializer.Deserialize<UsuariLogin>(user);
                 if (userauth.isAdmin)
                 {
                     return true;

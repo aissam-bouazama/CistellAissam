@@ -5,9 +5,9 @@ namespace CistellAissam.Repository
 {
     public class UsuariRepository : IUsuariRepository
     {
-        public Usuari? getUsuari(string email)
+        public UsuariLogin? getUsuari(string email)
         {
-            foreach (Usuari us in Usuaris._usuaris)
+            foreach (UsuariLogin us in Usuaris._usuaris)
             {
                 if (us.email == email)
                 {
@@ -17,7 +17,7 @@ namespace CistellAissam.Repository
             return null;
         }
 
-        public bool BloquejarUsuari(Usuari usuari)
+        public bool BloquejarUsuari(UsuariLogin usuari)
         {
             var usuaris = Usuaris._usuaris;
             int index = usuaris.IndexOf(usuari);

@@ -37,20 +37,20 @@ namespace CistellAissam.Utils
         }
 
 
-        public static Usuari ObtenerUsuariAuth(HttpContext httpcontext)
+        public static UsuariLogin ObtenerUsuariAuth(HttpContext httpcontext)
         {
             var user = httpcontext.Session.GetString("usuarisession");
 
 
             if (user != null)
             {
-                var userauth = JsonSerializer.Deserialize<Usuari>(user);
+                var userauth = JsonSerializer.Deserialize<UsuariLogin>(user);
                 return userauth;
             }
             return null;
         }
 
-        public static void AfegirUsuariSessio(HttpContext httpcontext, Usuari usuari)
+        public static void AfegirUsuariSessio(HttpContext httpcontext, UsuariLogin usuari)
         {
             httpcontext.Session.SetString("usuarisession", JsonSerializer.Serialize(usuari));
             httpcontext.Session.Remove(usuari.email);

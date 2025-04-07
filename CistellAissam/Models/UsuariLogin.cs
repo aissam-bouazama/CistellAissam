@@ -2,7 +2,7 @@
 
 namespace CistellAissam.Models
 {
-    public class Usuari
+    public class UsuariLogin
     {
         /// <summary>email. Serveix com a login. Ha de ser únic.</summary>
         [Required(ErrorMessage = "el email és Obligatori")]
@@ -22,7 +22,7 @@ namespace CistellAissam.Models
         /// <summary>Data y hora de creació o darrera edició o bloqueig</summary>
         public DateTime lastupdate { get; set; }
 
-        public Usuari(string password, string email, bool isAdmin, bool locked, DateTime lastupdate)
+        public UsuariLogin(string password, string email, bool isAdmin, bool locked, DateTime lastupdate)
         {
             this.password = password;
             this.email = email;
@@ -31,7 +31,7 @@ namespace CistellAissam.Models
             this.lastupdate = lastupdate;
         }
 
-        public Usuari()
+        public UsuariLogin()
         {
             this.email = string.Empty;
             this.password = string.Empty;
