@@ -16,7 +16,7 @@ builder.Services.AddRazorPages();
 
 builder.Services.AddScoped<ICistellRepository, CistellRepository>();
 builder.Services.AddScoped<IProducteRepository, ProducteRepository>();
-//builder.Services.AddTransient<IUsuariRepository, UsuariRepository>();
+builder.Services.AddTransient<IUsuariRepository, UsuariRepository>();
 //builder.Services.AddTransient<IUsuariRepository, UsuariRepositoryBD>();
 
 var app = builder.Build();
