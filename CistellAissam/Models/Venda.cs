@@ -7,6 +7,7 @@ namespace CistellAissam.Models
         [Required(ErrorMessage = "El camp NFactura és obligatori")]
         public int NFactura { get; set; }
      
+        public string Comprador { get; set; } //EL EMAIL DEL COMPRADOR
         public string Nif { get; set; }
         
         public string Nom { get; set; }
@@ -21,6 +22,7 @@ namespace CistellAissam.Models
             this.Nif = String.Empty;
             this.Nom = String.Empty;
             this.Cognom = String.Empty;
+            this.Comprador
             this.Productescomprats = new List<ProducteComprat>();
 
         }
