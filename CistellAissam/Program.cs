@@ -1,9 +1,16 @@
+using CistellAissam.Models;
 using CistellAissam.Repository;
 using CistellAissam.Repository.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
+ServerVersion version = MySqlServerVersion.AutoDetect(connectionString);
+builder.Services.AddDbContext<TiendaContext>(options =>
+    options.UseMySql(connectionString, version));
 builder.Services.AddControllersWithViews();
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>
@@ -16,10 +23,17 @@ builder.Services.AddRazorPages();
 
 builder.Services.AddScoped<ICistellRepository, CistellRepository>();
 builder.Services.AddScoped<IProducteRepository, ProducteRepository>();
-builder.Services.AddTransient<IUsuariRepository, UsuariRepository>();
+builder.Services.AddScoped<IUsuariRepository, UsuariRepository>();
 //builder.Services.AddTransient<IUsuariRepository, UsuariRepositoryBD>();
 
 var app = builder.Build();
+
+using(var scope = app.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider.GetRequiredService<TiendaContext>();
+ 
+    dbContext.Database.EnsureCreated();
+}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

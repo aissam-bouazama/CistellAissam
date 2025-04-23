@@ -5,6 +5,7 @@ namespace CistellAissam.Models
     public class Producte
     {
         [Required(ErrorMessage = "el codi del producte és obligatori")]
+        [Key]
         public string codiProducte { get; set; }
         [Required(ErrorMessage = "el nom del producte és obligatori")]
         public string nomProducte { get; set; }

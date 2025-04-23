@@ -22,7 +22,7 @@ namespace CistellAissam.Models
             this.Nif = String.Empty;
             this.Nom = String.Empty;
             this.Cognom = String.Empty;
-            this.Comprador
+            this.Comprador = String.Empty;
             this.Productescomprats = new List<ProducteComprat>();
 
         }
