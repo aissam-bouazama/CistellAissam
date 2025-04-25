@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CistellAissam.Models
 {
@@ -6,8 +7,13 @@ namespace CistellAissam.Models
     {
         /// <summary>email. Serveix com a login. Ha de ser únic.</summary>
         [Required(ErrorMessage = "el email és Obligatori")]
+        [Key]
+        [ForeignKey(nameof(Usuari))]
         [EmailAddress(ErrorMessage = "El usuari  ha de ser de format Email.")]
         public string email { get; set; }
+
+        
+        public Usuari usuari { get; set; }
 
         /// <summary>Password. Es guarda sense cap encriptaió</summary>
         [Required(ErrorMessage = "Has de posar una Contrasenya")]

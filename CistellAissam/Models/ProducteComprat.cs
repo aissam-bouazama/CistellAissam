@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CistellAissam.Models
 {
@@ -6,8 +7,10 @@ namespace CistellAissam.Models
     {
         public int Id { get; set; }
         public string Nom { get; set; }
-        [Required(ErrorMessage = "el producte del producte és obligatori")]
-        public Producte producte{ get; set; }
+        [Required(ErrorMessage = "el Code del producte és obligatori")]
+        [ForeignKey("producte")]
+        public string ProducteCode { get; set; }
+        public Producte Producte{ get; set; }
         public string Preu { get; set; }
         public int Quantitat { get; set; }
 
@@ -15,7 +18,8 @@ namespace CistellAissam.Models
         {
             this.Id = 0;
             this.Nom = String.Empty;
-            this.producte = new Producte();
+            this.Producte = new Producte();
+            this.ProducteCode = String.Empty;
             this.Preu = String.Empty;
             this.Quantitat = 0;
         }
@@ -24,7 +28,7 @@ namespace CistellAissam.Models
         {
             this.Id = id;
             this.Nom = nom;
-            this.producte = producte;
+            this.Producte = producte;
             this.Preu = preu;
             this.Quantitat = quantitat;
         }

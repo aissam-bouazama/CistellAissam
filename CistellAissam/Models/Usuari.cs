@@ -5,14 +5,19 @@ namespace CistellAissam.Models
     public class Usuari
     {
         [Required(ErrorMessage = "el email és obligatori")]
+        [Key]
         [EmailAddress(ErrorMessage = "El email ha de ser de format Email.")]
         public string Email { get; set; }
         [Required(ErrorMessage = "el Nif és obligatori")]
+
+        [MaxLength(9, ErrorMessage = "El Nif ha de tenir 9 caràcters")]
         public string Nif { get; set; }
 
         public string Nom { get; set; }
         public string Cognom { get; set; }
-       
+
+
+
         public string Telefon { get; set; }
  
       
