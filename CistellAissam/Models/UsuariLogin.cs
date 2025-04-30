@@ -8,9 +8,11 @@ namespace CistellAissam.Models
         /// <summary>email. Serveix com a login. Ha de ser únic.</summary>
         [Required(ErrorMessage = "el email és Obligatori")]
         [Key]
-        [ForeignKey(nameof(Usuari))]
+        [ForeignKey(nameof(usuari))]
         [EmailAddress(ErrorMessage = "El usuari  ha de ser de format Email.")]
         public string email { get; set; }
+
+
 
         
         public Usuari usuari { get; set; }
