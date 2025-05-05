@@ -1,4 +1,5 @@
-﻿using CistellAissam.Repository.Interfaces;
+﻿using CistellAissam.Data;
+using CistellAissam.Repository.Interfaces;
 using CistellAissam.Utils;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,11 +8,15 @@ namespace CistellAissam.Controllers
     public class LoginController : Controller
     {
 
-        private readonly IUsuariRepository _usuariRepository;
+       // private readonly IUsuariRepository _usuariRepository;
 
-        public LoginController(IUsuariRepository usuariRepository)
+        private TiendaContext _DBContext;
+
+        //IUsuariRepository usuariRepository,
+        public LoginController(TiendaContext _dbcontext)
         {
-            _usuariRepository = usuariRepository;
+           // _usuariRepository = usuariRepository;
+            this._DBContext = _dbcontext;
         }
 
         public IActionResult Index()
@@ -24,7 +29,8 @@ namespace CistellAissam.Controllers
             string email = Request.Form["email"];
             string Contrasenya = Request.Form["password"];
             ModelState.Clear();
-            var usuari = _usuariRepository.getUsuari(email);
+            //var usuari = _usuariRepository.getUsuari(email);
+            var usuari = _DBContext.usuariLogins.FirstOrDefault(usuari => usuari.email == email);
             if (usuari != null)
             {
                 int count = 0;

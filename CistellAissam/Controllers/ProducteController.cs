@@ -1,4 +1,5 @@
-﻿using CistellAissam.Models;
+﻿using CistellAissam.Data;
+using CistellAissam.Models;
 using CistellAissam.Repository.Interfaces;
 using CistellAissam.Utils;
 using Microsoft.AspNetCore.Mvc;
@@ -10,9 +11,11 @@ namespace CistellAissam.Controllers
 
         /*  ProducteRepository repo = new();*/
         private readonly IProducteRepository _RepoProducte;
+        private readonly TiendaContext _DBContext;
 
-        public ProducteController(IProducteRepository repo)
+        public ProducteController(IProducteRepository repo,TiendaContext _dbcontext)
         {
+            this._DBContext = _dbcontext;
             this._RepoProducte = repo;
         }
 
@@ -59,7 +62,7 @@ namespace CistellAissam.Controllers
                     {
                         return View("AfegirProducte", producte);
                     }
-                    else if (_RepoProducte.AfegirProducte(producte))
+                    else if (ProducteUtils.Add(producte,_DBContext))
                     {
                         ViewData["resultat"] = "Producte Afegit Correctament";
                     }

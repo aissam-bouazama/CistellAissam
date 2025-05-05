@@ -1,4 +1,5 @@
-﻿using CistellAissam.Models;
+﻿using CistellAissam.Data;
+using CistellAissam.Models;
 using CistellAissam.Repository;
 using System.Text.Json;
 
@@ -6,6 +7,28 @@ namespace CistellAissam.Utils
 {
     public class UsuariUtils
     {
+        public static bool BloquejarUsuari(UsuariLogin usuari,TiendaContext _DBContext)
+        {
+            //var usuaris = Usuaris._usuaris;
+            //int index = usuaris.IndexOf(usuari);
+            var user = _DBContext.usuariLogins.Single(b => b.email == usuari.email);
+            if(user != null)
+            {
+                user.locked = true;
+                user.lastupdate = DateTime.Now;
+                _DBContext.SaveChanges();
+                return true;
+            }
+         
+           /* if (index != -1)
+            {
+                Usuaris._usuaris[index].locked = true;
+                Usuaris._usuaris[index].lastupdate = DateTime.Now;
+                return true;
+            }*/
+            return false;
+
+        }
         /// <summary>
         /// 
         /// </summary>
