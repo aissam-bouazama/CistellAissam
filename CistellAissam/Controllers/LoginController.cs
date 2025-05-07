@@ -2,6 +2,7 @@
 using CistellAissam.Repository.Interfaces;
 using CistellAissam.Utils;
 using Microsoft.AspNetCore.Mvc;
+using ZstdSharp.Unsafe;
 
 namespace CistellAissam.Controllers
 {
@@ -59,7 +60,7 @@ namespace CistellAissam.Controllers
                         ModelState.AddModelError("password", "La Contrasenya no és Correcte");
                         if (!usuari.locked)
                         {
-                            count = UsuariUtils.ControlintentosLogin(usuari, count);
+                            count = UsuariUtils.ControlintentosLogin(usuari, count,_DBContext);
                         }
                         HttpContext.Session.SetInt32(email, count);
                         return View("login", usuari);

@@ -6,6 +6,7 @@ namespace CistellAissam.Models
     {
         [Required(ErrorMessage = "El camp NFactura és obligatori")]
         [Key]
+        
         public int NFactura { get; set; }
 
         

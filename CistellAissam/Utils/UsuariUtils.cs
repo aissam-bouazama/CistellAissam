@@ -35,12 +35,13 @@ namespace CistellAissam.Utils
         /// <param name="usuari"></param>
         /// <param name="count"></param>
         /// <returns>devuelve el numero de intentos en el caso q passa los intentos permitidos Bloquejara el Usuari</returns>
-        public static int ControlintentosLogin(UsuariLogin usuari, int count)
+        public static int ControlintentosLogin(UsuariLogin usuari, int count,TiendaContext _DBContext)
         {
             UsuariRepository usuaris = new();
             if (count == 2)
             {
-                usuaris.BloquejarUsuari(usuari);
+               // usuaris.BloquejarUsuari(usuari);
+               UsuariUtils.BloquejarUsuari(usuari, _DBContext);
                 return count;
 
             }

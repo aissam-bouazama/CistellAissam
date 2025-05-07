@@ -1,4 +1,5 @@
-﻿using CistellAissam.Models;
+﻿using CistellAissam.Data;
+using CistellAissam.Models;
 using CistellAissam.Repository.Interfaces;
 using CistellAissam.Utils;
 using Microsoft.AspNetCore.Mvc;
@@ -11,17 +12,19 @@ namespace CistellAissam.Controllers
     public class CistellController : Controller
     {
         //  ProducteRepository repo = new();
-        private ICistellRepository _RepoCistell;
+        //private ICistellRepository _RepoCistell;
+        private TiendaContext _DBContext;
         Cistelles cistella = new();
-        public CistellController(ICistellRepository repo)
+        public CistellController(ICistellRepository repo,TiendaContext context)
         {
-            this._RepoCistell = repo;
+           // this._RepoCistell = repo;
+            this._DBContext = context;
         }
         [HttpGet]
         public IActionResult Index()
         {
             ViewData["userauth"] = SessionUtils.ObtenerUsuariAuth(HttpContext);
-            var productos = _RepoCistell.ObtenirProductos();
+            var productos = _DBContext.productes.ToList(); /*_RepoCistell.ObtenirProductos()*/;
             ViewData["contador"] = QuantitatCistella();
             return View("Cistell", productos);
         }
@@ -55,7 +58,7 @@ namespace CistellAissam.Controllers
         public IActionResult Cestill()
         {
             ViewData["userauth"] = SessionUtils.ObtenerUsuariAuth(HttpContext);
-            var productos = _RepoCistell.ObtenirProductos();
+            var productos = _DBContext.productes.ToList(); 
             List<Producte> pr = new List<Producte>();
             var preuTotal = 0.0;
             int quantitat = 0;
@@ -67,7 +70,7 @@ namespace CistellAissam.Controllers
                 {
                     foreach (var elem in productesSession)
                     {
-                        var producte = _RepoCistell.getProducte(elem.codeproducte);
+                        var producte = _DBContext.productes.FirstOrDefault(pr => pr.codiProducte == elem.codeproducte);
                         if (producte != null)
                         {
                             double totalpreuproducte = Math.Round(elem.quantitat * producte.preuProducte, 2);
@@ -134,13 +137,33 @@ namespace CistellAissam.Controllers
                 {
                     foreach (var elem in productesSession)
                     {
-                        var producte = _RepoCistell.getProducte(elem.codeproducte);
+                        var producte = _DBContext.productes.FirstOrDefault(pr => pr.codiProducte == elem.codeproducte);
                         if (producte != null)
                         {
                             double totalpreuproducte = Math.Round(elem.quantitat * producte.preuProducte, 2);
                             ViewData["quantitat" + producte.codiProducte] = elem.quantitat;
                             ViewData["preuTotalt" + producte.codiProducte] = totalpreuproducte;
                             preuTotal += totalpreuproducte;
+                            ProducteComprat prc = new ProducteComprat();
+                            Venda venda = new Venda();
+                            
+                            prc.Preu = producte.preuProducte;
+                            prc.ProducteCode = producte.codiProducte;
+                            prc.Nom = producte.nomProducte;
+                            prc.Producte = producte;
+                            venda.Nom = producte.nomProducte;
+                            venda.CompradorEmail = SessionUtils.ObtenerUsuariAuth(HttpContext).email;
+                            var usuari = _DBContext.usuaris.FirstOrDefault(u => u.Email == venda.CompradorEmail);
+                            venda.Nif = usuari.Nif;
+                        
+
+
+
+
+                            _DBContext.vendes.Add(venda);
+                            _DBContext.SaveChangesAsync();
+                            _DBContext.productescomprats.Add(prc);
+                            _DBContext.SaveChangesAsync();
                             pr.Add(producte);
                         }
                     }

@@ -19,6 +19,7 @@ namespace CistellAissam.Repository
 
         public bool BloquejarUsuari(UsuariLogin usuari)
         {
+
             var usuaris = Usuaris._usuaris;
             int index = usuaris.IndexOf(usuari);
             if (index != -1)
