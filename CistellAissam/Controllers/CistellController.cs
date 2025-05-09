@@ -21,14 +21,17 @@ namespace CistellAissam.Controllers
            // this._RepoCistell = repo;
             this._DBContext = context;
         }
-        [HttpGet]
-        public IActionResult Index()
+        
+        public IActionResult Index(string filter)
         {
             ViewData["userauth"] = SessionUtils.ObtenerUsuariAuth(HttpContext);
-            var productos = _DBContext.productes.ToList(); /*_RepoCistell.ObtenirProductos()*/;
+            var productos = string.IsNullOrEmpty(filter)
+    ? _DBContext.productes.ToList()
+    : _DBContext.productes.Where(pr => pr.nomProducte.Contains(filter)).ToList(); /*_RepoCistell.ObtenirProductos()*/;
             ViewData["contador"] = QuantitatCistella();
             return View("Cistell", productos);
         }
+       
 
         [HttpPost]
 
