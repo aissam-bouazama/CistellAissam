@@ -3,6 +3,7 @@ using CistellAissam.Models;
 using CistellAissam.Repository.Interfaces;
 using CistellAissam.Utils;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages;
 using System.Text.Json;
 
 
@@ -120,10 +121,13 @@ namespace CistellAissam.Controllers
 
             return RedirectToAction("Cestill");
         }
-        public IActionResult FinalitzarCompra()
+        public async Task<IActionResult> FinalitzarCompra()
         {
             ViewData["userauth"] = SessionUtils.ObtenerUsuariAuth(HttpContext);
-
+            if(SessionUtils.ObtenerUsuariAuth(HttpContext) == null)
+            {
+                return RedirectToAction(nameof(LoginController.Index), nameof(Login));
+            }
             List<Producte> pr = new List<Producte>();
             //inicializar el variable para almacenar el precio total de productos del cistell
             var preuTotal = 0.0;
@@ -148,22 +152,20 @@ namespace CistellAissam.Controllers
                             Venda venda = new Venda();
                             
                             prc.Preu = producte.preuProducte;
-                            prc.ProducteCode = producte.codiProducte;
+                            prc.productecodiProducte = producte.codiProducte;
                             prc.Nom = producte.nomProducte;
-                            prc.Producte = producte;
+                           
                             venda.Nom = producte.nomProducte;
                             venda.CompradorEmail = SessionUtils.ObtenerUsuariAuth(HttpContext).email;
                             var usuari = _DBContext.usuaris.FirstOrDefault(u => u.Email == venda.CompradorEmail);
                             venda.Nif = usuari.Nif;
-                        
-
-
-
-
+                            venda.Data = DateTime.Now;
+                            prc.Quantitat = elem.quantitat;
                             _DBContext.vendes.Add(venda);
-                            _DBContext.SaveChangesAsync();
+                            await _DBContext.SaveChangesAsync();
+                            prc.VendaNFactura = venda.NFactura;
                             _DBContext.productescomprats.Add(prc);
-                            _DBContext.SaveChangesAsync();
+                            await _DBContext.SaveChangesAsync();
                             pr.Add(producte);
                         }
                     }
