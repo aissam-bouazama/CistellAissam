@@ -32,17 +32,18 @@
     </div>
     <div class="productes">
     @foreach (var product in Model){
-            <figure class="figure col mb-5" style="text-align:center; ">
-                <img style="width:300px !important;" width="300" height="300" src="/imatgesProductes/Productes/@product.imatgeproducte" class="figure-img img-fluid rounded" alt="A generic square placeholder image with rounded corners in a figure.">
-                <figcaption class="figure-caption">@product.nomProducte <br /><b>@product.preuProducte €</b></figcaption>
-                
-                    <form asp-controller="Cistell" asp-action="Afegir" method="post">
-                        <input type="hidden" name="codeproducte" value="@product.codiProducte"/>
-                        <input class="btn btn-outline-secondary fa" id="btn-afegir" type="button" value="Afegir a Cesta"/>
+            <div class="card text-center" style="width: 300px;">
+            <img class="card-img-top" style="width:300px !important;" width="300" height="300" src="/imatgesProductes/Productes/@product.imatgeproducte">
+            <div class="card-body">
+                <h5 class="card-title">@product.nomProducte<br /><b>@product.preuProducte €</b></h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+               
+                <form asp-controller="Cistell" asp-action="Afegir" method="post">
+                    <input type="hidden" name="codeproducte" value="@product.codiProducte" />
+                    <input class="btn btn-outline-secondary fa" id="btn-afegir" type="button" value="Afegir a Cesta" />
                 </form>
-                
-                 
-       </figure>
+            </div>
+            </div>
           
     }
 
