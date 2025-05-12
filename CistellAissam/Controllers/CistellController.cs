@@ -158,9 +158,11 @@ namespace CistellAissam.Controllers
                             prc.productecodiProducte = producte.codiProducte;
                             prc.Nom = producte.nomProducte;
                            
-                            venda.Nom = producte.nomProducte;
-                            venda.CompradorEmail = SessionUtils.ObtenerUsuariAuth(HttpContext).email;
+                            
                             var usuari = _DBContext.usuaris.FirstOrDefault(u => u.Email == venda.CompradorEmail);
+                            venda.Nom = usuari.Nom;
+                            venda.Cognom = usuari.Cognom;
+                            venda.CompradorEmail = SessionUtils.ObtenerUsuariAuth(HttpContext).email;
                             venda.Nif = usuari.Nif;
                             venda.Data = DateTime.Now;
                             prc.Quantitat = elem.quantitat;

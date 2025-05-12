@@ -15,37 +15,70 @@ namespace CistellAissam.Controllers
         }
         public IActionResult Index()
         {
-            ViewData["userauth"] = SessionUtils.ObtenerUsuariAuth(HttpContext);
-            var usuaris = _DBContext.usuaris.ToList();
-            return View("Index", usuaris);
+            var userauth = SessionUtils.ObtenerUsuariAuth(HttpContext);
+            ViewData["userauth"] = userauth;
+            if(UsuariUtils.IsadminUsuari(HttpContext))
+            {
+                var usuaris = _DBContext.usuaris.ToList();
+                return View("Index", usuaris);
+            }
+            else
+            {
+                return LocalRedirect("/");
+            }
+           
         }
        public IActionResult Details(string id)
         {
-            var usuari = _DBContext.usuaris.FirstOrDefault(x => x.Email == id);
-            return View("Details", usuari);
+            if(UsuariUtils.IsadminUsuari(HttpContext))
+            {
+                var usuari = _DBContext.usuaris.FirstOrDefault(x => x.Email == id);
+                return View("Details", usuari);
+            }
+            else
+            {
+                return LocalRedirect("/");
+            }
+           
         }
         public IActionResult Edit(string id)
         {
-            var usuari = _DBContext.usuaris.FirstOrDefault(x => x.Email == id);
-            return View("Edit", usuari);
+            if(UsuariUtils.IsadminUsuari(HttpContext))
+            {
+                var usuari = _DBContext.usuaris.FirstOrDefault(x => x.Email == id);
+                return View("Edit", usuari);
+            }
+            else
+            {
+                return LocalRedirect("/");
+            }
+           
         }
         [HttpPost]
         public IActionResult Edit(Usuari usuari)
         {
-            if (!ModelState.IsValid)
+            if(UsuariUtils.IsadminUsuari(HttpContext))
             {
-                RedirectToAction("Edit", usuari);
+                if (!ModelState.IsValid)
+                {
+                    RedirectToAction("Edit", usuari);
+                }
+                var usuariBD = _DBContext.usuaris.FirstOrDefault(x => x.Email == usuari.Email);
+                if (usuariBD != null)
+                {
+                    usuariBD.Nom = usuari.Nom;
+                    usuariBD.Cognom = usuari.Cognom;
+                    usuariBD.Telefon = usuari.Telefon;
+                    usuariBD.DataNaixement = usuari.DataNaixement;
+                    _DBContext.SaveChanges();
+                }
+                return RedirectToAction("Index");
             }
-            var usuariBD = _DBContext.usuaris.FirstOrDefault(x => x.Email == usuari.Email);
-            if (usuariBD != null)
+            else
             {
-                usuariBD.Nom = usuari.Nom;
-                usuariBD.Cognom = usuari.Cognom;
-                usuariBD.Telefon = usuari.Telefon;
-                usuariBD.DataNaixement = usuari.DataNaixement;
-                _DBContext.SaveChanges();
+                return LocalRedirect("/");
             }
-            return RedirectToAction("Index");
+           
         }
 
 

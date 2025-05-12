@@ -43,6 +43,7 @@ namespace CistellAissam.Controllers
         /// <returns>Accés només al administrador (Afegir Produe Nou)</returns>
         public async Task<IActionResult> AfegirProducte(Producte producte, IFormFile imatgeproducte)
         {
+       
             if (UsuariUtils.IsadminUsuari(HttpContext))
             {
 
