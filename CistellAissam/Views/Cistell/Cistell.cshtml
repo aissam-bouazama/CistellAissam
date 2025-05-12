@@ -17,22 +17,20 @@
 
 }
 @{
-   
-     
-    <div class="productes">
-        <div>
+
+    <div>
         <form method="post">
-                <div class="input-group">
-                    <div class="form-outline" data-mdb-input-init>
-                        <input type="search" id="form1" name="filter" class="form-control" placeholder="Buscar Producte." />
-                    </div>
-                    <button asp-controller="Cistell" asp-action="index" type="submit" class="btn btn-primary" data-mdb-ripple-init>
-                        <i class="fas fa-search"></i>
-                    </button>
+            <div class="input-group">
+                <div class="form-outline" data-mdb-input-init>
+                    <input type="search" id="form1" name="filter" class="form-control" placeholder="Buscar Producte." />
                 </div>
+                <button asp-controller="Cistell" asp-action="index" type="submit" class="btn btn-primary" data-mdb-ripple-init>
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
         </form>
-        </div>
-        <br>
+    </div>
+    <div class="productes">
     @foreach (var product in Model){
             <figure class="figure col mb-5" style="text-align:center; ">
                 <img style="width:300px !important;" width="300" height="300" src="/imatgesProductes/Productes/@product.imatgeproducte" class="figure-img img-fluid rounded" alt="A generic square placeholder image with rounded corners in a figure.">

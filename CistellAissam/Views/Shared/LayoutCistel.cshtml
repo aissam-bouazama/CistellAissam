@@ -100,7 +100,7 @@
                 {
                     
                    <li style="color:white;">
-                      <a asp-controller="Login" style="color:white;" asp-action="Index" class="nav-link" id="Cistell" aria-current="page">
+                        <a asp-controller="Usuari" style="color:white;" asp-route-id="@userauth.email" asp-action="Details" class="nav-link" id="Cistell" aria-current="page">
                         <i class="fa fa-user"></i>&nbsp;@userauth.email</a>
                    </li>
                    <li>

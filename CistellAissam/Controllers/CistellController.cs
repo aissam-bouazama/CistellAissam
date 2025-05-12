@@ -3,6 +3,7 @@ using CistellAissam.Models;
 using CistellAissam.Repository.Interfaces;
 using CistellAissam.Utils;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages;
 using System.Text.Json;
 
@@ -157,12 +158,12 @@ namespace CistellAissam.Controllers
                             prc.Preu = producte.preuProducte;
                             prc.productecodiProducte = producte.codiProducte;
                             prc.Nom = producte.nomProducte;
-                           
-                            
-                            var usuari = _DBContext.usuaris.FirstOrDefault(u => u.Email == venda.CompradorEmail);
+
+                            venda.CompradorEmail = SessionUtils.ObtenerUsuariAuth(HttpContext).email;
+                            var usuari =await _DBContext.usuaris.FirstOrDefaultAsync(u => u.Email == venda.CompradorEmail);
                             venda.Nom = usuari.Nom;
                             venda.Cognom = usuari.Cognom;
-                            venda.CompradorEmail = SessionUtils.ObtenerUsuariAuth(HttpContext).email;
+                           
                             venda.Nif = usuari.Nif;
                             venda.Data = DateTime.Now;
                             prc.Quantitat = elem.quantitat;
